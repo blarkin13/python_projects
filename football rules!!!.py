@@ -1,2 +1,2 @@
-x = input('whats your favorite team')
-print('go ' + x +'!')
+x = input('Whats your favorite team?')
+print('Go ' + x +'!')
