@@ -14,6 +14,10 @@ while 1:
 input('It is a cold stormy night...')
 input('In the forest lives monsters. The monsters are prepairing to storm the castle.')
 input('The castle is doomed and only you can save it')
+input(" ")
+print("****** LEVEL I ******")
+print("**** The Castle *****")
+input(" ")
 while 1:
     var_response = input('Should the king send his knights to battle the monsters?: ')
     if var_response =='yes':
@@ -110,8 +114,10 @@ while 1:
         input("Wizard " + name + ": Your health is: " + str(var_health))
        
         
-                      
-  
+input(" ")                     
+print("****** LEVEL II ******")
+print("** The Dark Forest ***")
+input(" ")
 x=input("Wizard " + name + ": What would you like to do now?: ")
 if x =='burn the castle':
     input("You are a bad ass!")
@@ -184,7 +190,12 @@ input("King: I could really use thier help  right now!")
 input("..")
 input("Back in the cold stormy forrest...")
 input(var_un +  ": lets get back to the to the castle to fight some monsters!")
-input("Wizaed " + name + ": Sure, but first we need to look for some supplies to fight these monsters out here")
+input("Wizard " + name + ": Sure, but first we need to look for some supplies to fight these monsters out here")
+input(" ")                     
+print("****** LEVEL II ******")
+print("** The Dark Forest 2 *")
+input(" ")
+
 if x =='attack':
     weapons = 0
 else:
@@ -229,7 +240,11 @@ while r != "no":
     var_health = var_health + bonus
     if var_health < 1:
         input("Wizard " + name + ": I thought that your name was " + var_un+ ", not Icarus!")
-        
+        input("Wizard " + name + ": I will find a potion to turn back time.")
+        input("Wizard " + name + ": A time before the monsters entered the castle.")
+        input("Wizard " + name + ": Until then...")
+        input("Game over")
+        exit()
     input("Wizard " + name + ": Your health is: " + str(var_health))
     if all(x in backpack for x in ['Mandrake', 'Moleyarrow', 'Nostrix']) == True:
         input("Wizard " + name + ": We have all items needed to create our potion.")
@@ -286,10 +301,31 @@ if monsters_outside > 0:
                 exit()
             break        
         elif r == 'no':
+            input("** LEVEL III episode **")
+            print("** The long way home **")
+            input("")
             input("this needs to be filled out with a new quest")   
             exit()
             break
     
                  
-input ("headed back to the cast with 0 monsters chasing you!")
+if monsters_outside >0:
+    input(" ")
+    print("****** LEVEL II episode ******")
+    print("** It's good to be lucky **")
+    input("")
+
+
+input(" ")
+print("****** LEVEL III ******")
+print("* The quick way back *")
+input("")
+
+input ("Headed back to the castle with 0 monsters chasing you!")
 exit()
+
+
+
+
+
+
