@@ -189,7 +189,7 @@ input("King: Where is that kid " + var_un + " and that wizard " + name +"?")
 input("King: I could really use their help  right now!")
 input("..")
 input("Back in the cold stormy forest...")
-input(var_un +  ": lets get back to the to the castle to fight some monsters!")
+input(var_un +  ": lets get back to the castle to fight some monsters!")
 input("Wizard " + name + ": Sure, but first we need to look for some supplies to fight these monsters out here")
 input(" ")                     
 print("****** LEVEL II ******")
@@ -323,9 +323,3 @@ input("")
 
 input ("Headed back to the castle with 0 monsters chasing you!")
 exit()
-
-
-
-
-
-
