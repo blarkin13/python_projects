@@ -6,6 +6,299 @@ var_lives = 3
 var_un = "bobo"
 name = "Chaps"
 
+import numpy as np
+def maze():
+  location_list = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56)
+  wall_list = (1, 2, 4, 5, 6, 7, 8, 9, 16, 17, 24, 25, 32, 33, 40, 41, 48, 49, 51, 52, 53, 54, 55, 56)
+  
+    
+  north_wall_list = (51,52,53,54,55)
+  east_wall_list = (16,24,32,40,48,56)
+  south_wall_list= (2,4,5,6,7)
+  west_wall_list = (1,9,17,25,33,41,49)
+  tree_list = (27,31,45)
+  grave_list = (10,13,34,46)
+  wet_area_list = (15,18,30,42,47)
+
+  inside_list = np.setdiff1d(location_list,wall_list, assume_unique=True)
+  tomb_list = (19,20,22,23,26,28,38,43)
+  x = 19
+  #if x in location_list:
+  # print(location_list)
+  location = 3
+  new_location = 0
+  response = ""
+  amulet_of_life1 = 1
+  amulet_of_life2 = 1
+  amulet_of_life3 = 1
+  iron = 1
+  dagger = 1
+  amulet_of_de = 1
+  items = 6
+  search = ""
+  while response != 'exit':
+    missing_items =  amulet_of_life1 + amulet_of_life2 + amulet_of_life3  + iron + dagger + amulet_of_de
+    print("-----------------Choose a direction-----------------")
+    response = input("|| North = 8 || East = 6 || South = 2 || West = 4 ||")
+    if response in ('2','4','6','8'):
+        if int(response) ==8:
+            print("moving north")
+            new_location = location + 8
+        elif int(response) ==6:
+            print("moving east")
+            new_location = location + 1
+        elif int(response) ==2:
+            print("moving south")
+            new_location = location - 8
+        elif int(response) == 4:
+            print("moving west")
+            new_location = location - 1
+        
+        if new_location in north_wall_list:
+            print("You found the North wall and can't go this way!")
+        elif new_location in east_wall_list:
+            print("You found the East wall and can't go this way!")
+        elif new_location in south_wall_list:
+            print("You found the South wall and can't go this way!")
+        elif new_location in west_wall_list:
+            print("You found the West wall and can't go this way!")
+        elif new_location in tomb_list:
+            print("You found a tomb and can't go this way!")
+
+        elif new_location in tree_list:
+            print("You found a tree!")
+            while 1:
+                search = input("Do you want to search it?: ")
+                if search == "no":
+                    location = new_location
+                    new_location = 0
+                    break
+                elif search =="yes":
+                    if new_location == 27:
+                        if amulet_of_de == 1:
+                            amulet_of_de = 0
+                            print("     ___________________")
+                            print("    |                   |")
+                            print("    |         _         |")
+                            print("    |         |         |")
+                            print("    |         |         |")
+                            print("    |   <----{O}---->   |")
+                            print("    |         |         |")
+                            print("    |         |         |")
+                            print("    |___________________|")
+                            print("You found the 'Amulet of unknown'!")
+                            location = new_location
+                            new_location = 0
+                        boa=input("Would you like to read the back of it?: ")
+                        if boa=="yes":
+                            print("     ___________________")
+                            print("    |                   |")
+                            print("    |   When you find   |")
+                            print("    |  that you are in  |")
+                            print("    |  trouble, repeat  |")
+                            print("    |    These words    |")
+                            print("    |  sudo apt get do  |")
+                            print("    |       break       |")
+                            print("    |___________________|")
+
+                        else:
+                            print("Nothing")
+                            location = new_location
+                            new_location = 0
+                    elif new_location == 31:
+                        if dagger == 1:
+                            dagger =0
+                            print("You found the an old dagger!")
+                            location = new_location
+                            new_location = 0
+                        else:
+                            print("Nothing")
+                            location = new_location
+                            new_location = 0
+                    else:
+                        print("Nothing")
+                        location = new_location
+                        new_location = 0            
+                break
+
+
+
+
+
+
+        elif new_location in grave_list:
+            print("You found a grave!")
+            while 1:
+                search = input("Do you want to search it?: ")
+                if search == "no":
+                    location = new_location
+                    new_location = 0
+                    break
+                elif search =="yes":
+                    
+                    if new_location == 10:
+                        
+                        if amulet_of_life1 == 1:
+                            amulet_of_life1 = 0
+                            print("        ___________________")
+                            print("       /__________________/|")
+                            print("      |                  | |")
+                            print("      |     Here lies    | |")
+                            print("      |                  | |")
+                            print("  |   |  Vasl Nemsicoff  | |")
+                            print("  |   |                  | |")
+                            print("  ^   |   -Power comes-  | |")
+                            print("{'O'} |   to those with  | |")
+                            print("      |     patience.    | |")
+                            print("      |                  | |")
+                            print("  ~~~ |                  | |~~~~")
+                            print("  ~~~ |                  | |~~")
+                            print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ")
+                            print("You found the 'Amulet of life'!")
+                            location = new_location
+                            new_location = 0
+                        else:
+                            print("        ___________________")
+                            print("       /__________________/|")
+                            print("      |                  | |")
+                            print("      |     Here lies    | |")
+                            print("      |                  | |")
+                            print("      |                  | |")
+                            print("      |                  | |")
+                            print("      |                  | |")
+                            print("      |                  | |")
+                            print("      |                  | |")
+                            print("      |                  | |")
+                            print("  ~~~ |                  | |~~~~")
+                            print("  ~~~ |                  | |~~")
+                            print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ")
+                            print("Nothing, but an unmarked headstone!")
+                            location = new_location
+                            new_location = 0
+                    elif new_location == 13:
+                        
+                        if amulet_of_life2 == 1:
+                            amulet_of_life2 =0
+                            print("        ___________________")
+                            print("       /__________________/|")
+                            print("      |                  | |")
+                            print("      |     Here lies    | |  |   ")
+                            print("      |                  | |  |   ")
+                            print("      |    Gren Taspin   | |  ^   ")
+                            print("      |                  | |{'O'} ")
+                            print("      | -Patience comes- | |")
+                            print("      |   to those with  | |")
+                            print("      |   a clear mind.  | |")
+                            print("      |                  | |")
+                            print("  ~~~~|                  | |~~~~")
+                            print("  ~~~ |                  | |~~")
+                            print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ")
+                            print("You found the 'Amulet of life'!")
+                            location = new_location
+                            new_location = 0
+                        else:
+                            print("        ___________________")
+                            print("       /__________________/|")
+                            print("      |                  | |")
+                            print("      |     Here lies    | |")
+                            print("      |                  | |")
+                            print("      |                  | |")
+                            print("      |                  | |")
+                            print("      |                  | |")
+                            print("      |                  | |")
+                            print("      |                  | |")
+                            print("      |                  | |")
+                            print("  ~~~~|                  | |~~~~")
+                            print("  ~~~ |                  | |~~")
+                            print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ")
+                            print("Nothing, but an unmarked headstone!")
+                            location = new_location
+                            new_location = 0
+                    else:
+                        print("        ___________________")
+                        print("       /__________________/|")
+                        print("      |                  | |")
+                        print("      |     Here lies    | |")
+                        print("      |                  | |")
+                        print("      |                  | |")
+                        print("      |                  | |")
+                        print("      |                  | |")
+                        print("      |                  | |")
+                        print("      |                  | |")
+                        print("      |                  | |")
+                        print("  ~~~~|                  | |~~~~")
+                        print("  ~~~ |                  | |~~")
+                        print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ")
+                        print("Nothing, but an unmarked headstone!")
+                        location = new_location
+                        new_location = 0            
+                break
+                    
+        elif new_location in wet_area_list:
+            print("You found a watery grave!")
+            while 1:
+                search = input("Do you want to search it?: ")
+                if search == "no":
+                    location = new_location
+                    new_location = 0
+                    break
+                elif search =="yes":
+                    
+                    if new_location == 42:
+                        if amulet_of_life3 ==1:
+                            amulet_of_life3 = 0
+                            print("You found the 'Amulet of life'!")
+                            location = new_location
+                            new_location = 0
+                        else:
+                            print("Nothing")
+                            location = new_location
+                            new_location = 0    
+                    elif new_location == 47:
+                        if iron ==1:
+                            iron = 0
+                            print("You found an iron sword!")
+                            location = new_location
+                            new_location = 0
+                        else:
+                            print("Nothing")
+                            location = new_location
+                            new_location = 0    
+                    else:
+                        print("Nothing")
+                        location = new_location
+                        new_location = 0                    
+                                
+
+                break       
+
+
+        elif new_location == 58:
+            if missing_items > 0:
+                print("You found the exit and can't go this way yet! You are still missing some items")
+            else:
+                print("You found the exit!")    
+                break           
+        
+        elif new_location == -5:
+            print("You found the enterance and can't go this way!")         
+
+        else:
+            location = new_location
+            new_location = 0
+
+        #print(location)
+
+    print(new_location)
+    if response not in ('2','4','6','8'):
+        print("Invalid response, no movement was taken.")   
+
+
+
+
+
+
+
 def attack(weapon):
     
     print(weapon)
@@ -189,17 +482,17 @@ def searching_for_supplies(var_un, name,var_health, var_monster_health, var_live
     input("Wizard " + name + ": the Warlocks plan was to cast a rise from the ground spell in the grave yard...")
     input("Wizard " + name + ": They turned the dead into monsters.")
     input("Wizard " + name + ": A group of Wizards found out what was happening and reversed the spell that the Witches cast.")
-    input("Wizard " + name + ": The non-magical beings ran back to the castle before they lost to many knights.")
+    input("Wizard " + name + ": The non-magical beings ran back to the castle before they lost too many knights.")
     input("Wizard " + name + ": When the Witches found out what had happened at the graveyard...")
     input("Wizard " + name + ": they blammed the Warlocks for not getting their monsters to attack quick enough.")
-    input("Wizard " + name + ": The Warlocks blammed the Witches of casting week spells.")
+    input("Wizard " + name + ": The Warlocks blammed the Witches of casting weak spells.")
     input( var_un + ": Seems like they both suck!")
     input("Wizard " + name + ": No, The Warlocks were powerful, the Witches ruined everything.")
     input("Wizard " + name + ": It wasn't the spells, it was the plan that failed them.")
     input("Wizard " + name + ": The Witches and Warlocks battled for years after.")
     input("Wizard " + name + ": The battle lasted until the Wizards stepped in to defeat the monsters and cast all of the witches and Warlocks ...")
     input("Wizard " + name + ": to a different realm.")
-    input( var_un + ": So there aren't anymore witches or warlocks here?")
+    input( var_un + ": So there aren't witches or warlocks here anymore?")
     input("Wizard " + name + ": That's what I'm going to find out.")
     input("Wizard " + name + ": I will meet you at pass by the edge of the forest and the swamp.")
     input( var_un + ": See ya later.")
@@ -282,8 +575,8 @@ def the_long_way_back(var_un, name,var_health, var_monster_health, var_lives, mo
 
 def looking_for_monsters(var_health, var_monster_health, var_lives, monsters_outside):
     input("")
-
-searching_for_supplies(var_un, name,var_health, var_monster_health, var_lives, monsters_outside )
+maze()
+#searching_for_supplies(var_un, name,var_health, var_monster_health, var_lives, monsters_outside )
 
 #input("Engaging in battle!")
 #while monsters_outside >0:
