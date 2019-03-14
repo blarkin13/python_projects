@@ -19,9 +19,12 @@ def maze():
   tree_list = (27,31,45)
   grave_list = (10,13,34,46)
   wet_area_list = (15,18,30,42,47)
-
+  
+  
   inside_list = np.setdiff1d(location_list,wall_list, assume_unique=True)
   tomb_list = (19,20,22,23,26,28,38,43)
+  backpack_list = ['Rusty Sword' , 'Missing', 'Lance', 'Missing', 'Missing', 'Missing']
+
   x = 19
   #if x in location_list:
   # print(location_list)
@@ -38,9 +41,23 @@ def maze():
   search = ""
   while response != 'exit':
     missing_items =  amulet_of_life1 + amulet_of_life2 + amulet_of_life3  + iron + dagger + amulet_of_de
-    print("-----------------Choose a direction-----------------")
-    response = input("|| North = 8 || East = 6 || South = 2 || West = 4 ||")
-    if response in ('2','4','6','8'):
+    print("------------------------------------Choose a direction------------------------------------")
+    response = input("|| North = 8 || East = 6 || South = 2 || West = 4 || bp = Backpack contents || ")
+    if response == "bp":
+        s = (str(backpack_list)[1:-1])
+        s = s.replace("', ", " || ")
+        s = s.replace("'", "")
+        s="||" + s + " ||"
+        bp = "backpack contents"
+        string3=s
+        string_length=len(string3)   # will be adding 10 extra spaces
+        string_revised=bp.center(string_length)
+
+        print(string_revised)
+        print(s)
+        
+
+    elif response in ('2','4','6','8'):
         if int(response) ==8:
             print("moving north")
             new_location = location + 8
@@ -77,6 +94,7 @@ def maze():
                     if new_location == 27:
                         if amulet_of_de == 1:
                             amulet_of_de = 0
+                            backpack_list[5] = "Amulet of Unknown"
                             print("     ___________________")
                             print("    |                   |")
                             print("    |         _         |")
@@ -108,6 +126,7 @@ def maze():
                     elif new_location == 31:
                         if dagger == 1:
                             dagger =0
+                            backpack_list[3] = "Dagger"
                             print("You found the an old dagger!")
                             location = new_location
                             new_location = 0
@@ -155,6 +174,7 @@ def maze():
                             print("  ~~~ |                  | |~~")
                             print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ")
                             print("You found the 'Amulet of life'!")
+                            backpack_list[4] = 'Amulet of life ' +str(3 - amulet_of_life1-amulet_of_life2-amulet_of_life3) + ' of 3'
                             location = new_location
                             new_location = 0
                         else:
@@ -194,6 +214,7 @@ def maze():
                             print("  ~~~ |                  | |~~")
                             print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ")
                             print("You found the 'Amulet of life'!")
+                            backpack_list[4] = 'Amulet of life ' +str(3 - amulet_of_life1-amulet_of_life2-amulet_of_life3) + ' of 3'
                             location = new_location
                             new_location = 0
                         else:
@@ -248,6 +269,7 @@ def maze():
                         if amulet_of_life3 ==1:
                             amulet_of_life3 = 0
                             print("You found the 'Amulet of life'!")
+                            backpack_list[4] = 'Amulet of life ' +str(3 - amulet_of_life1-amulet_of_life2-amulet_of_life3) + ' of 3'
                             location = new_location
                             new_location = 0
                         else:
@@ -258,6 +280,7 @@ def maze():
                         if iron ==1:
                             iron = 0
                             print("You found an iron sword!")
+                            backpack_list[2] = "Iron sword"
                             location = new_location
                             new_location = 0
                         else:
@@ -289,8 +312,10 @@ def maze():
 
         #print(location)
 
-    print(new_location)
-    if response not in ('2','4','6','8'):
+    print("Your current location is: " + str(location))
+    
+    
+    if response not in ('2','4','6','8','bp','exit'):
         print("Invalid response, no movement was taken.")   
 
 
@@ -554,6 +579,53 @@ def searching_for_supplies(var_un, name,var_health, var_monster_health, var_live
     input("..")
     input( "Female voice: Hurry up and answer me!")
     input( var_un + ": I am just a traveler, looking for supplies to rid this area of the monsters.")
+    input( var_un + ": Who are you?")
+    input( "Female voice: I protect this graveyard from scavengers.")
+    input( "Female voice: This graveyard is a sacred place.")
+    input( "Female voice: I sense that you are not just a lone traveler!")
+    input( var_un + ": I was with my friend.")
+    input( var_un + ": We split up before I entered the swamp.") 
+    input( "Female voice: This is not just a swamp. This is called the 'Battle Swamp' for a reason!")
+    input( "Female voice: A long time ago...")
+    input( var_un + ": I already heard this story.")
+    input( var_un + ": My friend is a wizard and he told me.")
+    input( var_un + ": He told me about the witches and warlocks trying to take over the castle")
+    print( "and how they battled each other when it didn't work.")
+    input( "Female voice: Your wizard friend is wrong.")
+    print( "Female voice: The witches did not try to take over the castle.")
+    print( "The witches came here to protect the area from the darkness.")
+    print( "The warlocks were never able to get to the castle, because the witches were able to stop them;")
+    print( "that is until the wizards stepped in. The warlocks cast a spell on the wizards.")
+    print( "a spell that made them believe that the witches casted a spell on the people of the castle.")
+    input( var_un + ": How do you know this?")
+    input( "Female voice: I have been here longer than the castle.")
+    print( "I have protected this land from the darkness.")
+    print( "I will stay here until the darkness is gone.")
+    input( var_un + ": Darkness?")
+    input( "Female voice: 'The Darkness' is the energy that comes from having evil warlocks in the area.")
+    input( var_un + ": I thought that the wizards got rid of all of the witches and warlocks.")
+    input( "Female voice: That was part of the spell that the warlock casted on the wizards.")
+    input( "Female voice: To make them believe that they were able to send all of the warlocks to a different realm.")
+    print( "A few of us witches and evidently at least one warlock are still here.")
+    print( "When the wizards thought that we were all gone.")
+    print( "They left this area because they thought that all evil was gone.")
+    input( var_un + ": You are a witch?")
+    input( "Gwenda: I am the Witch of truth. ")
+    input( var_un + ": 'Evidently at least one warlock'?")
+    input( "Gwenda: Monsters are back in the area!")
+    input( var_un + ": Oh, yeah, good point.")
+    input( "Gwenda: I sense that you are capable of helping me get rid of the monster.")
+    input( "Gwenda: In this graveyard there are tools that you will need.")
+    input( "Gwenda: If you are able to find your way through the graveyard,")
+    print( "you will find six items.")
+    input( "Gwenda: Walk through the enterence and i will meet you by the exit on the north wall.")
+    maze()
+
+
+
+
+
+
 
 
 
@@ -575,7 +647,8 @@ def the_long_way_back(var_un, name,var_health, var_monster_health, var_lives, mo
 
 def looking_for_monsters(var_health, var_monster_health, var_lives, monsters_outside):
     input("")
-maze()
+    maze()
+maze()    
 #searching_for_supplies(var_un, name,var_health, var_monster_health, var_lives, monsters_outside )
 
 #input("Engaging in battle!")
