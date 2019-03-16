@@ -1,16 +1,485 @@
+import random
 from random import randint
+
 monsters_outside = 1
 var_health = 10
 var_monster_health = 30
 var_lives = 3
+var_potion = 1
 var_un = "bobo"
 name = "Chaps"
-
+backpack_list = ""
 import numpy as np
+def lowercase(x):
+    x =x.lower()
+    return x
+
+
+def escape_the_castle(var_health,var_potion):
+
+    while 1:
+        var_un = input('Enter Nickname:')
+        if var_un != "":
+            break
+      
+    input('It is a cold stormy night...')
+    input('In the forest lives monsters. The monsters are prepairing to storm the castle.')
+    input('The castle is doomed and only you can save it')
+    input(" ")
+    print("****** LEVEL I ******")
+    print("**** The Castle *****")
+    input(" ")
+    while 1:
+        var_response = input('Should the king send his knights to battle the monsters?: ')
+        if var_response =='yes':
+            break
+        
+        elif var_response =='no':
+            break
+        
+    if var_response != 'no':
+        var_health += -1
+        input('All but 3 knights have been defeated they are too strong. Lose 1 health.')
+        input('Your health is now ' + str(var_health))
+    print('The castle is also the home of...')
+    while 1:
+        name = input('Please enter a  wizard name: ')
+        if name != "":
+            break
+    input(name + ' is a powerful wizard')
+    input(name + ' has a potion to restore health...')
+    if var_health !=10:
+       
+        input('The potion may increase your health up to 10')
+        
+    
+        if input('Do you want to use it?: ' ) =='yes':
+            var_health = 10
+            var_potion += -1
+    if var_health ==10:
+        print(str(var_potion) + ' potions remain, but you are full on health')
+    else:
+        print(str(var_potion) + ' potions remain, but you are near full health')
+    input('Oh no! the monsters broke through the gate')
+    x = input('would you like to run to the back exit?: ')
+    if x == 'no':
+        input('You are pinned down')
+        var_health += -3
+        x=input('Will you try to escape?: ')
+        if x=='no':
+            input('GAME OVER!!!')
+            exit()
+    
+    
+    while 1:
+        r = input('Would you like to evacuate the castle?: ')
+    
+        if r == "yes":
+    
+            y=(random.randint(1,3))
+            
+            if y == 1:
+                input("You didn't escape in time!")
+                input('The monsters ate you for dinner')
+                exit()
+            elif y == 2:
+                input('You and the wizard escaped! But you tripped over a rock. Lose 1 health')
+                var_health += -1
+                if var_health < 1:
+                    input("Wizard " + name + ": I thought that your name was " + var_un + " the brave, not " + var_un - " the clumsy!")
+                    input("Wizard " + name + ": I will find a potion to turn back time.")
+                    input("Wizard " + name + ": A time before the monsters entered the castle.")
+                    input("Wizard " + name + ": Until then...")
+                    input("Game over")
+                    exit()
+                input("Wizard " + name + ": Your health is: " + str(var_health))
+            else:
+                input('You and the wizard escaped!')
+            break        
+        else:
+    
+            
+               
+            y=str((random.randint(1,5)))
+            if y == '1':
+                var_object = "a barrel of gunpowder."
+            elif y == '2':
+                var_object = "your mommy."
+            elif y == '3':
+                var_object = "a trash can."
+            elif y == '4':
+                var_object = "a skinny pole, really? how would that work?"        
+            else:
+                var_object = "a cannon"   
+            var_health += -2
+            input("A monster found you hiding behind " +var_object+ " Luckily, you got a way and only lost 2 health.")
+            
+            if var_health < 1:
+    
+                input("Wizard " + name + ": You were brave " + var_un + "! Luck was not with you on this adventure")
+                input("Wizard " + name + ": I will find a potion to turn back time.")
+                input("Wizard " + name + ": A time before the monsters entered the castle.")
+                input("Wizard " + name + ": Until then...")
+                input("Game over")
+                exit()
+            input("Wizard " + name + ": Your health is: " + str(var_health))
+           
+            
+    input(" ")
+    return (var_un, name, var_health)
+def dark_forest(var_health, var_monster_health, var_lives, monsters_outside, var_un, name):#(var_health, var_monster_health, var_lives, monsters_outside,var_un, name)
+    print("****** LEVEL II ******")
+    print("** The Dark Forest ***")
+    input(" ")
+    x=input("Wizard " + name + ": What would you like to do now?: ")
+    if x =='burn the castle':
+        input("You are a bad ass!")
+        print("Game Over")
+        exit()
+    else:
+        input("Wizard " + name + ": " + x +"? Ok, how about we look for supplies instead?")
+    y=str((random.randint(1,3)))
+    if y == '1':
+        input("Wizard " + name + ": You found a wizard lightning potion")
+        weapon ='wizard lightning'
+    elif y == '2':
+        input("Wizard " + name + ": You found a flame sword")
+        weapon ='a flame sword'
+    else:
+        input("Wizard " + name + ": You found a gernade!")
+        weapon ='a grenade'
+    input("..")
+    input("...")
+    monsters_outside = 5
+    input("The monsters are chasing you!")
+    x=input("Should you hide? or attack with " + weapon +"?: ")
+    if x== 'hide':
+        print("RUMBLE! RUMBLE! RUMBLE! ... you're safe, but lost 2 health hiding in thorn bushes!")
+        var_health += -2
+        if var_health < 1:
+            input("Wizard " + name + ": You were brave " + var_un + "! Luck was not with you on this adventure")
+            input("Wizard " + name + ": I will find a potion to turn back time.")
+            input("Wizard " + name + ": A time before the monsters entered the castle.")
+            input("Wizard " + name + ": Until then...")
+            input("Game over")
+            exit()
+        input("Wizard " + name + ": Your health is: " + str(var_health))
+    elif x == 'attack':
+        input ('your attack killed two out of five monsters and lost one health')
+        monsters_outside = 3
+        var_health += -1
+        if var_health < 1:
+            input("Wizard " + name + ": You were brave " + var_un + "! Luck was not with you on this adventure")
+            input("Wizard " + name + ": I will find a potion to turn back time.")
+            input("Wizard " + name + ": A time before the monsters entered the castle.")
+            input("Wizard " + name + ": Until then...")
+            input("Game over")
+            exit()
+        input("Wizard " + name + ": Your health is: " + str(var_health))
+    
+        
+    else:
+        x = input("Please type hide or attack")
+        input("Too late...")
+        input("You didn't react quick enough")
+        input("The monsters ate you for Dinner")
+        print("Game Over")
+        exit()
+    
+    
+    input("Wizard " +name+": We are both still alive...")
+    input(var_un+": YEAH, it was close though.")
+    input("Wizard " +name+": so true...")
+    input(var_un+": I wonder whats going on inside the castle")       
+    input("Wizard " +name+": We can check my crystal ball!")
+    input(var_un+": OK, let's check!")
+    input("..")    
+    input("Wizard " +name+": I see the castle...")
+    input("..")
+    input("Wizard " +name+": I see the king is trapped in his throne room.")
+    input("..")
+    input("King: Where is that kid " + var_un + " and that wizard " + name +"?")
+    input("King: I could really use their help  right now!")
+    input("..")
+    input("Back in the cold stormy forest...")
+    input(var_un +  ": lets get back to the castle to fight some monsters!")
+    input("Wizard " + name + ": Sure, but first we need to look for some supplies to fight these monsters out here")
+    input(" ")                     
+    print("****** LEVEL II ******")
+    print("** The Dark Forest 2 *")
+    input(" ")
+    
+    if x =='attack':
+        weapons = 0
+    else:
+        weapons = 1
+    input("wizard " +name+": We have " + str(weapons) + " weapon(s).")
+    r ="yes"
+    backpack = ["","","" ]
+    
+    while r != "no":
+        r = input("Wizard " + name +": Do you want to search for more items? If we find Mandrake Root, Moleyarrow, and Nostrix, I can make a potion to defeat the monsters out here: ")
+        if r == 'no':
+            break
+        
+        items_list = ["an apple! They are delicious, they only give you ", "a radish! Although they are small, they still give you ", " a suit of armor! This will give you ", "a monster hide! This will give you ", "a monsters empty nest! At least you can move on and lose ", "a poison berry, Yuck! lose ", "oh no! a cave with monsters, you lose " , "a thorn bush, ouch! That took away ","Mandrake ","Moleyarrow ","Nostrix "]
+        y=str((random.randint(0,10)))
+        if y == '0':
+            bonus = 1
+        elif y == '1':
+            bonus = 1
+        elif y == '2':
+            bonus = 3
+        elif y == '3':
+            bonus = 2
+        elif y == '4':
+            bonus = 0
+        elif y == '5':
+            bonus = -2
+        elif y == '6':
+            bonus = -4
+        elif y == '7':
+            bonus = -1     
+        elif y == '8':
+            bonus = 0  
+            backpack[0]="Mandrake"
+        elif y == '9':
+            bonus = 0
+            backpack[1]="Moleyarrow"  
+        elif y == '10':
+            bonus = 0
+            backpack[2]="Nostrix"                                            
+        input("You found: " + str(items_list[int(y)]) + "" + str(bonus)+ " health bonus.")
+        var_health = var_health + bonus
+        if var_health < 1:
+            input("Wizard " + name + ": I thought that your name was " + var_un+ ", not Icarus!")
+            input("Wizard " + name + ": I will find a potion to turn back time.")
+            input("Wizard " + name + ": A time before the monsters entered the castle.")
+            input("Wizard " + name + ": Until then...")
+            input("Game over")
+            exit()
+        input("Wizard " + name + ": Your health is: " + str(var_health))
+        if all(x in backpack for x in ['Mandrake', 'Moleyarrow', 'Nostrix']) == True:
+            input("Wizard " + name + ": We have all items needed to create our potion.")
+            r2 = input("Wizard " + name + " Do you want to spend 2 health to cast the spell?: ")
+            if r2 == "yes":
+                var_health += -2
+                if var_health < 1:
+                    input("Wizard " + name + ": You were brave " + var_un + "! You didn't have enough health to cast that spell.")
+                else:
+                    input("Wizard " + name + ": Lorem ipstum")
+                    input("Wizard " + name + ": Lorem ipstum dolor sit")
+                    input("Wizard " + name + ": Lorem ipstum dolor sit amet!")
+                    input(".")
+                    input("..")
+                    input("...")
+                    backpack[0]=""
+                    backpack[1]=""
+                    backpack[2]=""              
+                    x2 = str((random.randint(0,5)))
+                    if x2 in ('2','4'):
+                        input("Wizard " + name + ": That didn't work properly. We must continue to search.")
+                        
+     
+                    else:
+                        input("All monster outside of the castle are now defeated!")
+                        monsters_outside = 0
+                        break
+    
+        x3 = input("Wizard " + name + ": Do you want to see what's in your backpack?")
+        if x3 == 'yes':
+            for items in backpack:
+                print(items)
+    
+    input("Wizard " + name + ": There are " + str(monsters_outside) + " monsters out here. ")     
+    input( var_un + ": Let's hurry back to the castle to save everyone else!")     
+    if monsters_outside > 0:
+        input("Wizard " + name + ": I don't see us making it back to the castle with out defeating the monsters first.")
+        input( var_un + ": I'm not scared!") 
+        input( var_un + ": The " + str(monsters_outside) + " monsters can be dealt with later!") 
+        input("Wizard " + name + ": The chance of us both making it back to the castle is 1 and 5.")
+        while 1:
+            r = input("Wizard " + name + ": Do you want to risk it? yes or exit: ")
+            if r == 'yes':
+                y=str((random.randint(0,5)))
+                if y != '4':
+                    input(".")
+                    input("..")
+                    input("...")
+                    input("Wizard " + name + ": You were brave " + var_un + "!")
+                    input("Wizard " + name + ": I will find a potion to turn back time.")
+                    input("Wizard " + name + ": A time before the monsters entered the castle.")
+                    input("Wizard " + name + ": Until then...")
+                    input("Game over")
+                    exit()
+                break        
+            elif r == 'exit':
+                y = input("** Are you sure? yes or no: **")
+                if y == "yes":
+                    exit()
+                    break
+        
+                     
+       
+    
+    input(" ")
+    print("****** LEVEL III ******")
+    print(" ** The journey back **")
+    input("")
+    
+    input ("Headed back to the castle with "+str(monsters_outside)+" monsters chasing you!")
+    
+    return(var_health, var_monster_health, var_lives, monsters_outside,var_un, name)
+    
+
+
+
+def searching_for_supplies(var_un, name,var_health, var_monster_health, var_lives, monsters_outside ):
+    input("Wizard " + name + ": You have shown some great strength out here.")
+    input("Wizard " + name + ": You are on the right path.")
+    input( var_un + ": Thanks?")
+    input("Wizard " + name + ": " + var_un + ", I believe that you have what it takes to be a great warrior. ")
+    input("Wizard " + name + ": To succeed, you will need to stay on this road. ")
+    input( var_un + ": What?")
+    input("Wizard " + name + ": You will need to stay on this road to find your way back to the castle. ")
+    input("Wizard " + name + ": I will be on my own journey. ")
+    input("Wizard " + name + ": I must find out why the monsters have come back! ")
+    input( var_un + ": Come back?")
+    input( var_un + ": Are you telling me that this has happened before?")
+    input("Wizard " + name + ": Years ago... ")
+    input("Wizard " + name + ": Wizards, Witches, and Warlocks battled. ")
+    input("Wizard " + name + ": They battled in the swamp.")
+    input("Wizard " + name + ": The king had just died and the Witches decided that they would take over the throne. ")
+    input("Wizard " + name + ": They made an aliance with the Warlocks. ")
+    input("Wizard " + name + ": They were to work together to take over the throne and live without non-magical beings. ")
+    input( var_un + ": How were they going to do that?")
+    input("Wizard " + name + ": The Witches cast a spell on the non-magical beings. Convincing them that... ")
+    input("Wizard " + name + ": The Warlocks were behind the kings death and that they should battle them in the swamps graveyard. ")
+    input("Wizard " + name + ": The non-magical beings got so upset and they whent to the swamp to find the Warlocks, but ... ")
+    input("Wizard " + name + ": the Warlocks plan was to cast a rise from the ground spell in the grave yard...")
+    input("Wizard " + name + ": They turned the dead into monsters.")
+    input("Wizard " + name + ": A group of Wizards found out what was happening and reversed the spell that the Witches cast.")
+    input("Wizard " + name + ": The non-magical beings ran back to the castle before they lost too many knights.")
+    input("Wizard " + name + ": When the Witches found out what had happened at the graveyard...")
+    input("Wizard " + name + ": they blammed the Warlocks for not getting their monsters to attack quick enough.")
+    input("Wizard " + name + ": The Warlocks blammed the Witches of casting weak spells.")
+    input( var_un + ": Seems like they both suck!")
+    input("Wizard " + name + ": No, The Warlocks were powerful, the Witches ruined everything.")
+    input("Wizard " + name + ": It wasn't the spells, it was the plan that failed them.")
+    input("Wizard " + name + ": The Witches and Warlocks battled for years after.")
+    input("Wizard " + name + ": The battle lasted until the Wizards stepped in to defeat the monsters and cast all of the witches and Warlocks ...")
+    input("Wizard " + name + ": to a different realm.")
+    input( var_un + ": So there aren't witches or warlocks here anymore?")
+    input("Wizard " + name + ": That's what I'm going to find out.")
+    input("Wizard " + name + ": I will meet you at pass by the edge of the forest and the swamp.")
+    input( var_un + ": See ya later.")
+    input(".")
+    input("..")
+    input("...")
+    input( var_un + ": This place is creepy.")
+    input( "Swamp Noises?: kiiick chiiick... kih kih ...")
+    input( var_un + ": What was that?")
+    input(".")
+    input("..")
+    input("...")
+    input( "Swamp Noises?: kiiick... chiiick... kih kih kih chih chih chih chiiiick!")
+    input(".")
+    input("..")
+    input("...")
+    input( var_un + ": I just need to ignore that, and find some weapons.")
+    r=""
+    z=0
+    c=0
+    g=0
+    
+    while z<2:
+        input( var_un + ": Ok, there is a cave that way and that swampy graveyeard over there.")
+        r= input( var_un + ": Should I search the cave or the graveyard?: ")
+        if r =="cave":
+            if c==0:
+                input( var_un + ": Oh, I see a rusty sword at the enterence, ") 
+                print( "but that cave itself is small and nothing else is in there")
+                z += 1
+                c+=1
+            else:
+                input( var_un + ": I already checked the cave!") 
+
+
+        elif r=="graveyard":
+            if g==0:
+                input( var_un + ": Oh, I see a lance at the enterence of the graveyard.")
+                if c == 0:
+                    print( var_un + ": I'd rather check the cave before I enter the graveyard.")
+                z += 1
+                g+=1
+            else:
+                print( var_un + ": I already checked the enterence")
+    
+    input( var_un + ": Let's see whats in the backpack.")
+    print("|| " + "rusty sword" + " || " + "Missing" + " || " + "lance" + "  || " + "Missing" + " || " )            
+    input( "Swamp Noises?: kiiick chiiick... kih kih ...")
+    input( var_un + ": Not that again.")
+    input(".")
+    input("..")
+    input("...")
+    input( "Swamp Noises?: kiiick... chiiick... kih kih kih chih chih chih chiiiick!")
+    input(".")
+    input("..")
+    input("...")
+    input( "Female voice: Who are you?")
+    input(".")
+    input("..")
+    input( "Female voice: Hurry up and answer me!")
+    input( var_un + ": I am just a traveler, looking for supplies to rid this area of the monsters.")
+    input( var_un + ": Who are you?")
+    input( "Female voice: I protect this graveyard from scavengers.")
+    input( "Female voice: This graveyard is a sacred place.")
+    input( "Female voice: I sense that you are not just a lone traveler!")
+    input( var_un + ": I was with my friend.")
+    input( var_un + ": We split up before I entered the swamp.") 
+    input( "Female voice: This is not just a swamp. This is called the 'Battle Swamp' for a reason!")
+    input( "Female voice: A long time ago...")
+    input( var_un + ": I already heard this story.")
+    input( var_un + ": My friend is a wizard and he told me.")
+    input( var_un + ": He told me about the witches and warlocks trying to take over the castle")
+    print( "and how they battled each other when it didn't work.")
+    input( "Female voice: Your wizard friend is wrong.")
+    print( "Female voice: The witches did not try to take over the castle.")
+    print( "The witches came here to protect the area from the darkness.")
+    print( "The warlocks were never able to get to the castle, because the witches were able to stop them;")
+    print( "that is until the wizards stepped in. The warlocks cast a spell on the wizards.")
+    print( "a spell that made them believe that the witches casted a spell on the people of the castle.")
+    input( var_un + ": How do you know this?")
+    input( "Female voice: I have been here longer than the castle.")
+    print( "I have protected this land from the darkness.")
+    print( "I will stay here until the darkness is gone.")
+    input( var_un + ": Darkness?")
+    input( "Female voice: 'The Darkness' is the energy that comes from having evil warlocks in the area.")
+    input( var_un + ": I thought that the wizards got rid of all of the witches and warlocks.")
+    input( "Female voice: That was part of the spell that the warlock casted on the wizards.")
+    input( "Female voice: To make them believe that they were able to send all of the warlocks to a different realm.")
+    print( "A few of us witches and evidently at least one warlock are still here.")
+    print( "When the wizards thought that we were all gone.")
+    print( "They left this area because they thought that all evil was gone.")
+    input( var_un + ": You are a witch?")
+    input( "Gwenda: I am the Witch of truth. ")
+    input( var_un + ": 'Evidently at least one warlock'?")
+    input( "Gwenda: Monsters are back in the area!")
+    input( var_un + ": Oh, yeah, good point.")
+    input( "Gwenda: I sense that you are capable of helping me get rid of the monster.")
+    input( "Gwenda: In this graveyard there are tools that you will need.")
+    input( "Gwenda: If you are able to find your way through the graveyard,")
+    print( "you will find six items.")
+    input( "Gwenda: Walk through the enterence and i will meet you by the exit on the north wall.")
+    
+
+
+
+
 def maze():
   location_list = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56)
   wall_list = (1, 2, 4, 5, 6, 7, 8, 9, 16, 17, 24, 25, 32, 33, 40, 41, 48, 49, 51, 52, 53, 54, 55, 56)
-  
+
     
   north_wall_list = (51,52,53,54,55)
   east_wall_list = (16,24,32,40,48,56)
@@ -23,6 +492,7 @@ def maze():
   
   inside_list = np.setdiff1d(location_list,wall_list, assume_unique=True)
   tomb_list = (19,20,22,23,26,28,38,43)
+                  #  ||Rusty Sword || Missing || Iron sword || Dagger || Amulet of life 2 of 3 || Amulet of Unknown ||
   backpack_list = ['Rusty Sword' , 'Missing', 'Lance', 'Missing', 'Missing', 'Missing']
 
   x = 19
@@ -43,6 +513,8 @@ def maze():
     missing_items =  amulet_of_life1 + amulet_of_life2 + amulet_of_life3  + iron + dagger + amulet_of_de
     print("------------------------------------Choose a direction------------------------------------")
     response = input("|| North = 8 || East = 6 || South = 2 || West = 4 || bp = Backpack contents || ")
+   
+    response = lowercase(response)
     if response == "bp":
         s = (str(backpack_list)[1:-1])
         s = s.replace("', ", " || ")
@@ -86,12 +558,16 @@ def maze():
             print("You found a tree!")
             while 1:
                 search = input("Do you want to search it?: ")
+                search = lowercase(search)
                 if search == "no":
                     location = new_location
-                    new_location = 0
+                    #new_location = 0
                     break
                 elif search =="yes":
+
                     if new_location == 27:
+                        location = new_location
+                        #ew_location = 0
                         if amulet_of_de == 1:
                             amulet_of_de = 0
                             backpack_list[5] = "Amulet of Unknown"
@@ -105,9 +581,9 @@ def maze():
                             print("    |         |         |")
                             print("    |___________________|")
                             print("You found the 'Amulet of unknown'!")
-                            location = new_location
-                            new_location = 0
+                            
                         boa=input("Would you like to read the back of it?: ")
+                        boa = lowercase(boa)
                         if boa=="yes":
                             print("     ___________________")
                             print("    |                   |")
@@ -121,23 +597,22 @@ def maze():
 
                         else:
                             print("Nothing")
-                            location = new_location
-                            new_location = 0
+                            
                     elif new_location == 31:
                         if dagger == 1:
                             dagger =0
                             backpack_list[3] = "Dagger"
                             print("You found the an old dagger!")
                             location = new_location
-                            new_location = 0
+                            #new_location = 0
                         else:
                             print("Nothing")
                             location = new_location
-                            new_location = 0
+                            #new_location = 0
                     else:
                         print("Nothing")
                         location = new_location
-                        new_location = 0            
+                        #new_location = 0            
                 break
 
 
@@ -149,6 +624,7 @@ def maze():
             print("You found a grave!")
             while 1:
                 search = input("Do you want to search it?: ")
+                search = lowercase(search)
                 if search == "no":
                     location = new_location
                     new_location = 0
@@ -183,16 +659,16 @@ def maze():
                             print("      |                  | |")
                             print("      |     Here lies    | |")
                             print("      |                  | |")
-                            print("      |                  | |")
-                            print("      |                  | |")
-                            print("      |                  | |")
-                            print("      |                  | |")
-                            print("      |                  | |")
-                            print("      |                  | |")
-                            print("  ~~~ |                  | |~~~~")
+                            print("      |     XEXXXXXX     | |")
+                            print("      |     XOTOOOOX     | |")
+                            print("      |     XOOOOTTX     | |")
+                            print("      |     XTOTOOOX     | |")
+                            print("      |     XOTTOTTX     | |")
+                            print("      |     XOOOOOOX     | |")
+                            print("  ~~~ |     XXEXXXXX     | |~~~~")
                             print("  ~~~ |                  | |~~")
                             print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ")
-                            print("Nothing, but an unmarked headstone!")
+                            print("Nothing, but an unmarked headstone?")
                             location = new_location
                             new_location = 0
                     elif new_location == 13:
@@ -223,13 +699,13 @@ def maze():
                             print("      |                  | |")
                             print("      |     Here lies    | |")
                             print("      |                  | |")
-                            print("      |                  | |")
-                            print("      |                  | |")
-                            print("      |                  | |")
-                            print("      |                  | |")
-                            print("      |                  | |")
-                            print("      |                  | |")
-                            print("  ~~~~|                  | |~~~~")
+                            print("      | 4950515253545556 | |")
+                            print("      | 4142434445464748 | |")
+                            print("      | 3334353637383940 | |")
+                            print("      | 2526272829303132 | |")
+                            print("      | 1718192021222324 | |")
+                            print("      | 0910111213141516 | |")
+                            print("  ~~~ | 0102030405060708 | |~~~~")
                             print("  ~~~ |                  | |~~")
                             print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ")
                             print("Nothing, but an unmarked headstone!")
@@ -259,6 +735,7 @@ def maze():
             print("You found a watery grave!")
             while 1:
                 search = input("Do you want to search it?: ")
+                search = lowercase(search)
                 if search == "no":
                     location = new_location
                     new_location = 0
@@ -280,7 +757,7 @@ def maze():
                         if iron ==1:
                             iron = 0
                             print("You found an iron sword!")
-                            backpack_list[2] = "Iron sword"
+                            backpack_list[1] = "Iron sword"
                             location = new_location
                             new_location = 0
                         else:
@@ -319,8 +796,7 @@ def maze():
         print("Invalid response, no movement was taken.")   
 
 
-
-
+  return(backpack_list)
 
 
 
@@ -482,150 +958,6 @@ def battle(var_health, var_monster_health, var_lives, monsters_outside):
     return(monsters_outside, var_lives, var_health)
     #exit()
 
-def searching_for_supplies(var_un, name,var_health, var_monster_health, var_lives, monsters_outside ):
-    input("Wizard " + name + ": You have shown some great strength out here.")
-    input("Wizard " + name + ": You are on the right path.")
-    input( var_un + ": Thanks?")
-    input("Wizard " + name + ": " + var_un + ", I believe that you have what it takes to be a great warrior. ")
-    input("Wizard " + name + ": To succeed, you will need to stay on this road. ")
-    input( var_un + ": What?")
-    input("Wizard " + name + ": You will need to stay on this road to find your way back to the castle. ")
-    input("Wizard " + name + ": I will be on my own journey. ")
-    input("Wizard " + name + ": I must find out why the monsters have come back! ")
-    input( var_un + ": Come back?")
-    input( var_un + ": Are you telling me that this has happened before?")
-    input("Wizard " + name + ": Years ago... ")
-    input("Wizard " + name + ": Wizards, Witches, and Warlocks battled. ")
-    input("Wizard " + name + ": They battled in the swamp.")
-    input("Wizard " + name + ": The king had just died and the Witches decided that they would take over the throne. ")
-    input("Wizard " + name + ": They made an aliance with the Warlocks. ")
-    input("Wizard " + name + ": They were to work together to take over the throne and live without non-magical beings. ")
-    input( var_un + ": How were they going to do that?")
-    input("Wizard " + name + ": The Witches cast a spell on the non-magical beings. Convincing them that... ")
-    input("Wizard " + name + ": The Warlocks were behind the kings death and that they should battle them in the swamps graveyard. ")
-    input("Wizard " + name + ": The non-magical beings got so upset and they whent to the swamp to find the Warlocks, but ... ")
-    input("Wizard " + name + ": the Warlocks plan was to cast a rise from the ground spell in the grave yard...")
-    input("Wizard " + name + ": They turned the dead into monsters.")
-    input("Wizard " + name + ": A group of Wizards found out what was happening and reversed the spell that the Witches cast.")
-    input("Wizard " + name + ": The non-magical beings ran back to the castle before they lost too many knights.")
-    input("Wizard " + name + ": When the Witches found out what had happened at the graveyard...")
-    input("Wizard " + name + ": they blammed the Warlocks for not getting their monsters to attack quick enough.")
-    input("Wizard " + name + ": The Warlocks blammed the Witches of casting weak spells.")
-    input( var_un + ": Seems like they both suck!")
-    input("Wizard " + name + ": No, The Warlocks were powerful, the Witches ruined everything.")
-    input("Wizard " + name + ": It wasn't the spells, it was the plan that failed them.")
-    input("Wizard " + name + ": The Witches and Warlocks battled for years after.")
-    input("Wizard " + name + ": The battle lasted until the Wizards stepped in to defeat the monsters and cast all of the witches and Warlocks ...")
-    input("Wizard " + name + ": to a different realm.")
-    input( var_un + ": So there aren't witches or warlocks here anymore?")
-    input("Wizard " + name + ": That's what I'm going to find out.")
-    input("Wizard " + name + ": I will meet you at pass by the edge of the forest and the swamp.")
-    input( var_un + ": See ya later.")
-    input(".")
-    input("..")
-    input("...")
-    input( var_un + ": This place is creepy.")
-    input( "Swamp Noises?: kiiick chiiick... kih kih ...")
-    input( var_un + ": What was that?")
-    input(".")
-    input("..")
-    input("...")
-    input( "Swamp Noises?: kiiick... chiiick... kih kih kih chih chih chih chiiiick!")
-    input(".")
-    input("..")
-    input("...")
-    input( var_un + ": I just need to ignore that, and find some weapons.")
-    r=""
-    z=0
-    c=0
-    g=0
-    
-    while z<2:
-        input( var_un + ": Ok, there is a cave that way and that swampy graveyeard over there.")
-        r= input( var_un + ": Should I search the cave or the graveyard?: ")
-        if r =="cave":
-            if c==0:
-                input( var_un + ": Oh, I see a rusty sword atthe enterence, ") 
-                print( "but that cave itself is small and nothing else is in there")
-                z += 1
-                c+=1
-            else:
-                input( var_un + ": I already checked the cave!") 
-
-
-        elif r=="graveyard":
-            if g==0:
-                input( var_un + ": Oh, I see a lance at the enterence of the graveyard.")
-                if c == 0:
-                    print( var_un + ": I'd rather check the cave before I enter the graveyard.")
-                z += 1
-                g+=1
-            else:
-                print( var_un + ": I already checked the enterence")
-    
-    input( var_un + ": Let's see whats in the backpack.")
-    print("|| " + "rusty sword" + " || " + "Missing" + " || " + "lance" + "  || " + "Missing" + " || " )            
-    input( "Swamp Noises?: kiiick chiiick... kih kih ...")
-    input( var_un + ": Not that again.")
-    input(".")
-    input("..")
-    input("...")
-    input( "Swamp Noises?: kiiick... chiiick... kih kih kih chih chih chih chiiiick!")
-    input(".")
-    input("..")
-    input("...")
-    input( "Female voice: Who are you?")
-    input(".")
-    input("..")
-    input( "Female voice: Hurry up and answer me!")
-    input( var_un + ": I am just a traveler, looking for supplies to rid this area of the monsters.")
-    input( var_un + ": Who are you?")
-    input( "Female voice: I protect this graveyard from scavengers.")
-    input( "Female voice: This graveyard is a sacred place.")
-    input( "Female voice: I sense that you are not just a lone traveler!")
-    input( var_un + ": I was with my friend.")
-    input( var_un + ": We split up before I entered the swamp.") 
-    input( "Female voice: This is not just a swamp. This is called the 'Battle Swamp' for a reason!")
-    input( "Female voice: A long time ago...")
-    input( var_un + ": I already heard this story.")
-    input( var_un + ": My friend is a wizard and he told me.")
-    input( var_un + ": He told me about the witches and warlocks trying to take over the castle")
-    print( "and how they battled each other when it didn't work.")
-    input( "Female voice: Your wizard friend is wrong.")
-    print( "Female voice: The witches did not try to take over the castle.")
-    print( "The witches came here to protect the area from the darkness.")
-    print( "The warlocks were never able to get to the castle, because the witches were able to stop them;")
-    print( "that is until the wizards stepped in. The warlocks cast a spell on the wizards.")
-    print( "a spell that made them believe that the witches casted a spell on the people of the castle.")
-    input( var_un + ": How do you know this?")
-    input( "Female voice: I have been here longer than the castle.")
-    print( "I have protected this land from the darkness.")
-    print( "I will stay here until the darkness is gone.")
-    input( var_un + ": Darkness?")
-    input( "Female voice: 'The Darkness' is the energy that comes from having evil warlocks in the area.")
-    input( var_un + ": I thought that the wizards got rid of all of the witches and warlocks.")
-    input( "Female voice: That was part of the spell that the warlock casted on the wizards.")
-    input( "Female voice: To make them believe that they were able to send all of the warlocks to a different realm.")
-    print( "A few of us witches and evidently at least one warlock are still here.")
-    print( "When the wizards thought that we were all gone.")
-    print( "They left this area because they thought that all evil was gone.")
-    input( var_un + ": You are a witch?")
-    input( "Gwenda: I am the Witch of truth. ")
-    input( var_un + ": 'Evidently at least one warlock'?")
-    input( "Gwenda: Monsters are back in the area!")
-    input( var_un + ": Oh, yeah, good point.")
-    input( "Gwenda: I sense that you are capable of helping me get rid of the monster.")
-    input( "Gwenda: In this graveyard there are tools that you will need.")
-    input( "Gwenda: If you are able to find your way through the graveyard,")
-    print( "you will find six items.")
-    input( "Gwenda: Walk through the enterence and i will meet you by the exit on the north wall.")
-    maze()
-
-
-
-
-
-
 
 
 
@@ -648,7 +980,60 @@ def the_long_way_back(var_un, name,var_health, var_monster_health, var_lives, mo
 def looking_for_monsters(var_health, var_monster_health, var_lives, monsters_outside):
     input("")
     maze()
-maze()    
+
+def learning_the_way(var_health, var_monster_health, var_lives, monsters_outside,var_un, name):
+    #print(str(var_health)+ str(var_monster_health)+ str(var_lives)+ str(monsters_outside)+str(var_un)+ str(name))
+    input( "Gwenda: You made it thorough the graveyard.")
+
+    
+    return(var_health, var_monster_health, var_lives, monsters_outside,var_un, name)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(var_un, name, var_health) = escape_the_castle(var_health,var_potion) 
+quit = input("Do you want to quit here? yes or no: ")
+if quit == "yes":
+    exit()
+(var_health, var_monster_health, var_lives, monsters_outside,var_un, name) = dark_forest(var_health, var_monster_health, var_lives, monsters_outside,var_un, name)
+quit = input("Do you want to quit here? yes or no: ")
+if quit == "yes":
+    exit()
+searching_for_supplies(var_un, name,var_health, var_monster_health, var_lives, monsters_outside )
+quit = input("Do you want to quit here? yes or no: ")
+if quit == "yes":
+    exit()
+  
+(backpack_list) = maze()  
+quit = input("Do you want to quit here? yes or no: ")
+if quit == "yes":
+    exit()
+(var_health, var_monster_health, var_lives, monsters_outside,var_un, name) = learning_the_way(var_health, var_monster_health, var_lives, monsters_outside,var_un, name)
+
+
+(backpack_list) = maze()  
+quit = input("Do you want to quit here? yes or no: ")
+if quit == "yes":
+    exit()
+
+battle(var_health, var_monster_health, var_lives, monsters_outside)
+
+
+
+
+
 #searching_for_supplies(var_un, name,var_health, var_monster_health, var_lives, monsters_outside )
 
 #input("Engaging in battle!")
