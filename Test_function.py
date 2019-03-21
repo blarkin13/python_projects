@@ -8,6 +8,8 @@ var_lives = 3
 var_potion = 1
 var_un = "bobo"
 name = "Chaps"
+var_wizard_side = 0
+var_warlock_side = 0 
 backpack_list = ""
 import numpy as np
 def lowercase(x):
@@ -15,56 +17,68 @@ def lowercase(x):
     return x
 
 
-def escape_the_castle(var_health,var_potion):
+def escape_the_castle(var_health,var_potion,var_wizard_side,var_warlock_side):
 
-    while 1:
-        var_un = input('Enter Nickname:')
-        if var_un != "":
-            break
+    
       
-    input('It is a cold stormy night...')
-    input('In the forest lives monsters. The monsters are prepairing to storm the castle.')
-    input('The castle is doomed and only you can save it')
-    input(" ")
+    print('It is a cold stormy night...')
+    print('In the forest lives monsters. The monsters are prepairing to storm the castle.')
+    print('The castle is doomed and only you can save it')
+
+    input("Press enter to continue... ")
     print("****** LEVEL I ******")
     print("**** The Castle *****")
-    input(" ")
+    input("Press enter to continue... ")
+
+
     while 1:
-        var_response = input('Should the king send his knights to battle the monsters?: ')
+        print("You will need a username to continue.")
+        print("Enter your username: ")
+        var_un = input(' ')
+        if var_un != "":
+            print("Your username is set to " + var_un + ".")
+            break
+    while 1:
+        print("Should the king send his knights to battle the monsters?: yes or no")
+        var_response = input(' ')
         if var_response =='yes':
+            var_warlock_side += 1
             break
         
         elif var_response =='no':
+            var_wizard_side += 1
             break
         
     if var_response != 'no':
         var_health += -1
         input('All but 3 knights have been defeated they are too strong. Lose 1 health.')
         input('Your health is now ' + str(var_health))
-    print('The castle is also the home of...')
+    print('The castle is also the home of a powerful wizard.')
+    
     while 1:
-        name = input('Please enter a  wizard name: ')
+        print("Please enter a  wizard name: ")
+        name = input(' ')
         if name != "":
             break
     input(name + ' is a powerful wizard')
-    input(name + ' has a potion to restore health...')
+    
     if var_health !=10:
+        input(name + ' has a potion to restore health...')
        
         input('The potion may increase your health up to 10')
         
-    
-        if input('Do you want to use it?: ' ) =='yes':
+        print("Do you want to use it?: yes or no")
+        if input(' ' ) =='yes':
             var_health = 10
             var_potion += -1
-    if var_health ==10:
-        print(str(var_potion) + ' potions remain, but you are full on health')
-    else:
-        print(str(var_potion) + ' potions remain, but you are near full health')
+    
     input('Oh no! the monsters broke through the gate')
-    x = input('would you like to run to the back exit?: ')
+    print("Would you like to run to the back exit?: yes or no")
+    x = input(' ')
     if x == 'no':
         input('You are pinned down')
         var_health += -3
+        print("Will you try to escape?: yes or no")
         x=input('Will you try to escape?: ')
         if x=='no':
             input('GAME OVER!!!')
@@ -72,7 +86,8 @@ def escape_the_castle(var_health,var_potion):
     
     
     while 1:
-        r = input('Would you like to evacuate the castle?: ')
+        print("Would you like to evacuate the castle?: yes or no")
+        r = input('')
     
         if r == "yes":
     
@@ -126,12 +141,15 @@ def escape_the_castle(var_health,var_potion):
            
             
     input(" ")
-    return (var_un, name, var_health)
-def dark_forest(var_health, var_monster_health, var_lives, monsters_outside, var_un, name):#(var_health, var_monster_health, var_lives, monsters_outside,var_un, name)
+    return (var_un, name, var_health,var_wizard_side,var_warlock_side)
+def dark_forest(var_health, var_monster_health, var_lives, monsters_outside, var_un, name,var_wizard_side,var_warlock_side):#(var_health, var_monster_health, var_lives, monsters_outside,var_un, name)
+    input("Press enter to continue... ")
     print("****** LEVEL II ******")
     print("** The Dark Forest ***")
+
     input(" ")
-    x=input("Wizard " + name + ": What would you like to do now?: ")
+    print("Wizard " + name + ": What would you like to do now?: ")
+    x=input(" ")
     if x =='burn the castle':
         input("You are a bad ass!")
         print("Game Over")
@@ -152,40 +170,40 @@ def dark_forest(var_health, var_monster_health, var_lives, monsters_outside, var
     input("...")
     monsters_outside = 5
     input("The monsters are chasing you!")
-    x=input("Should you hide? or attack with " + weapon +"?: ")
-    if x== 'hide':
-        print("RUMBLE! RUMBLE! RUMBLE! ... you're safe, but lost 2 health hiding in thorn bushes!")
-        var_health += -2
-        if var_health < 1:
-            input("Wizard " + name + ": You were brave " + var_un + "! Luck was not with you on this adventure")
-            input("Wizard " + name + ": I will find a potion to turn back time.")
-            input("Wizard " + name + ": A time before the monsters entered the castle.")
-            input("Wizard " + name + ": Until then...")
-            input("Game over")
-            exit()
-        input("Wizard " + name + ": Your health is: " + str(var_health))
-    elif x == 'attack':
-        input ('your attack killed two out of five monsters and lost one health')
-        monsters_outside = 3
-        var_health += -1
-        if var_health < 1:
-            input("Wizard " + name + ": You were brave " + var_un + "! Luck was not with you on this adventure")
-            input("Wizard " + name + ": I will find a potion to turn back time.")
-            input("Wizard " + name + ": A time before the monsters entered the castle.")
-            input("Wizard " + name + ": Until then...")
-            input("Game over")
-            exit()
-        input("Wizard " + name + ": Your health is: " + str(var_health))
-    
+    while 1:
+
+        print("Should you hide or attack with " + weapon +"?: hide or attack")
+        x=input(" ")
+        if x== 'hide':
+            var_warlock_side += 1
+            print("RUMBLE! RUMBLE! RUMBLE! ... you're safe, but lost 2 health hiding in thorn bushes!")
+            var_health += -2
+            if var_health < 1:
+                input("Wizard " + name + ": You were brave " + var_un + "! Luck was not with you on this adventure")
+                input("Wizard " + name + ": I will find a potion to turn back time.")
+                input("Wizard " + name + ": A time before the monsters entered the castle.")
+                input("Wizard " + name + ": Until then...")
+                input("Game over")
+                exit()
+            input("Wizard " + name + ": Your health is: " + str(var_health))
+            break
+        elif x == 'attack':
+            input ('Your attack killed two out of five monsters and lost one health')
+            monsters_outside = 3
+            var_health += -1
+            if var_health < 1:
+                var_wizard_side += 1
+                input("Wizard " + name + ": You were brave " + var_un + "! Luck was not with you on this adventure")
+                input("Wizard " + name + ": I will find a potion to turn back time.")
+                input("Wizard " + name + ": A time before the monsters entered the castle.")
+                input("Wizard " + name + ": Until then...")
+                input("Game over")
+                exit()
+            input("Wizard " + name + ": Your health is: " + str(var_health))
+            break
         
-    else:
-        x = input("Please type hide or attack")
-        input("Too late...")
-        input("You didn't react quick enough")
-        input("The monsters ate you for Dinner")
-        print("Game Over")
-        exit()
-    
+        
+       
     
     input("Wizard " +name+": We are both still alive...")
     input(var_un+": YEAH, it was close though.")
@@ -218,8 +236,12 @@ def dark_forest(var_health, var_monster_health, var_lives, monsters_outside, var
     backpack = ["","","" ]
     
     while r != "no":
-        r = input("Wizard " + name +": Do you want to search for more items? If we find Mandrake Root, Moleyarrow, and Nostrix, I can make a potion to defeat the monsters out here: ")
+        print("Wizard " + name +": If we find Mandrake Root, Moleyarrow, and Nostrix, ")
+        print("        I can make a potion to defeat the monsters out here.")
+        print("Wizard " + name +": Do you want to search for more items?: press enter to search or no to quit")
+        r = input(" ")
         if r == 'no':
+            var_warlock_side += 1
             break
         
         items_list = ["an apple! They are delicious, they only give you ", "a radish! Although they are small, they still give you ", " a suit of armor! This will give you ", "a monster hide! This will give you ", "a monsters empty nest! At least you can move on and lose ", "a poison berry, Yuck! lose ", "oh no! a cave with monsters, you lose " , "a thorn bush, ouch! That took away ","Mandrake ","Moleyarrow ","Nostrix "]
@@ -284,9 +306,10 @@ def dark_forest(var_health, var_monster_health, var_lives, monsters_outside, var
                     else:
                         input("All monster outside of the castle are now defeated!")
                         monsters_outside = 0
+                        var_wizard_side += 1
                         break
-    
-        x3 = input("Wizard " + name + ": Do you want to see what's in your backpack?")
+        print("Wizard " + name + ": Do you want to see what's in your backpack?: yes or press enter ")
+        x3 = input(" ")
         if x3 == 'yes':
             for items in backpack:
                 print(items)
@@ -329,19 +352,20 @@ def dark_forest(var_health, var_monster_health, var_lives, monsters_outside, var
     
     input ("Headed back to the castle with "+str(monsters_outside)+" monsters chasing you!")
     
-    return(var_health, var_monster_health, var_lives, monsters_outside,var_un, name)
+    return(var_health, var_monster_health, var_lives, monsters_outside,var_un, name,var_wizard_side,var_warlock_side)
     
 
 
 
-def searching_for_supplies(var_un, name,var_health, var_monster_health, var_lives, monsters_outside ):
+def searching_for_supplies(var_un, name,var_health, var_monster_health, var_lives, monsters_outside,var_wizard_side,var_warlock_side):
     input("Wizard " + name + ": You have shown some great strength out here.")
     input("Wizard " + name + ": You are on the right path.")
     input( var_un + ": Thanks?")
     input("Wizard " + name + ": " + var_un + ", I believe that you have what it takes to be a great warrior. ")
     input("Wizard " + name + ": To succeed, you will need to stay on this road. ")
     input( var_un + ": What?")
-    input("Wizard " + name + ": You will need to stay on this road to find your way back to the castle. ")
+    input("Wizard " + name + ": You will need to stay on this road to find your way to the battle swamp.")
+    print(" There you may be able to find items to help us back at the castle. ")
     input("Wizard " + name + ": I will be on my own journey. ")
     input("Wizard " + name + ": I must find out why the monsters have come back! ")
     input( var_un + ": Come back?")
@@ -376,6 +400,13 @@ def searching_for_supplies(var_un, name,var_health, var_monster_health, var_live
     input(".")
     input("..")
     input("...")
+
+
+    print("****** LEVEL III ******")
+    print("**** The Battle Swamp *****")
+    input("Press enter to continue... ")
+
+
     input( var_un + ": This place is creepy.")
     input( "Swamp Noises?: kiiick chiiick... kih kih ...")
     input( var_un + ": What was that?")
@@ -393,8 +424,9 @@ def searching_for_supplies(var_un, name,var_health, var_monster_health, var_live
     g=0
     
     while z<2:
-        input( var_un + ": Ok, there is a cave that way and that swampy graveyeard over there.")
-        r= input( var_un + ": Should I search the cave or the graveyard?: ")
+        input( var_un + ": Ok, there is a cave to the right and a swampy graveyeard to the left.")
+        print( var_un + ": Should I search the cave or the graveyard?: cave or graveyard")
+        r= input(" ")
         if r =="cave":
             if c==0:
                 input( var_un + ": Oh, I see a rusty sword at the enterence, ") 
@@ -466,11 +498,15 @@ def searching_for_supplies(var_un, name,var_health, var_monster_health, var_live
     input( var_un + ": 'Evidently at least one warlock'?")
     input( "Gwenda: Monsters are back in the area!")
     input( var_un + ": Oh, yeah, good point.")
-    input( "Gwenda: I sense that you are capable of helping me get rid of the monster.")
+    input( "Gwenda: I sense that you are capable of helping me get rid of the monsters.")
     input( "Gwenda: In this graveyard there are tools that you will need.")
     input( "Gwenda: If you are able to find your way through the graveyard,")
     print( "you will find six items.")
     input( "Gwenda: Walk through the enterence and i will meet you by the exit on the north wall.")
+    input("Press enter to continue... ")
+    print("****** LEVEL IV ******")
+    print("****** The Maze ******")
+    input("Press enter to continue... ")
     
 
 
@@ -828,22 +864,22 @@ def attack(weapon):
     if weapon == "silver sword":
         var_hit_damage = 2
         random_hits = randint(0, 4)
-        if  str(random_return_damage) in ('2','4','6', '8'):
+        if  str(random_return_damage) in ('2', '4', '6', '8'):
             return_damage = 4
     elif weapon == "iron sword":
         var_hit_damage = 3
         random_hits = randint(0, 2)
-        if  str(random_return_damage) in ('2','4','6'):
+        if  str(random_return_damage) in ('2', '4', '6'):
             return_damage = 5
     elif weapon == 'lance':
         var_hit_damage = 5
-        if  str(random_return_damage) in ('2','4','6','8'):
+        if  str(random_return_damage) in ('2', '4', '6', '8'):
             return_damage = 4        
         random_hits = randint(0, 1)
     elif weapon == 'dagger':
         var_hit_damage = 1
         random_hits = randint(0, 7)
-        if  str(random_return_damage) in ('2','4','6', '8'):
+        if  str(random_return_damage) in ('2', '4', '6', '8'):
             return_damage = 6        
     else:
         print("Weapon not found")
@@ -914,6 +950,7 @@ def attack(weapon):
 
 
 def battle(var_health, var_monster_health, var_lives, monsters_outside):
+ 
     weapons_list = ["silver sword", "iron sword", "lance", "dagger"]
     while 1:
         print("|| " + weapons_list[0] + " = 0 || " + weapons_list[1] + " = 1 || " + weapons_list[2] + " = 2 || " + weapons_list[3] + " = 3 || " )
@@ -934,9 +971,9 @@ def battle(var_health, var_monster_health, var_lives, monsters_outside):
             var_health +=10
             monsters_outside += -1
             if str(monsters_outside) in ("0","2","3","4","5"):
-                input(str(monsters_outside) + " monsters remain in the 'Battle Swamp'!")
+                input(str(monsters_outside) + " monsters remain in the 'Dark Forest'!")
             else:
-                input(str(monsters_outside) + " monster remains in the Battle Swamp'!")
+                input(str(monsters_outside) + " monster remains in the Dark Forest'!")
                     
             break
         if var_health < 1:
@@ -970,8 +1007,7 @@ def battle(var_health, var_monster_health, var_lives, monsters_outside):
 def the_quick_way_back(var_un, name,var_health, var_monster_health, var_lives, monsters_outside ):
     input("")
 
-def the_long_way_back(var_un, name,var_health, var_monster_health, var_lives, monsters_outside ):
-    input("")
+
     
 
 
@@ -981,37 +1017,233 @@ def looking_for_monsters(var_health, var_monster_health, var_lives, monsters_out
     input("")
     maze()
 
-def learning_the_way(var_health, var_monster_health, var_lives, monsters_outside,var_un, name):
+def learning_the_way(var_health, var_monster_health, var_lives, monsters_outside,var_un, name,backpack_list):
     #print(str(var_health)+ str(var_monster_health)+ str(var_lives)+ str(monsters_outside)+str(var_un)+ str(name))
-    input( "Gwenda: You made it thorough the graveyard.")
+    input("Press enter to continue... ")
+    print("****** LEVEL V ******")
+    print("*** The Training ****")
+    input("Press enter to continue... ")
 
-    
+    input( "Gwenda: You made it through the graveyard!")
+    input( "Gwenda: Let's see what you found.")
+    print("||Rusty Sword || Iron sword || Lance || Dagger || Amulet of life 3 of 3 || Amulet of Unknown ||")
+    #["silver sword", "iron sword", "lance", "dagger"]
+    input( var_un + ": A rusty sword!")
+    input( "Gwenda: That sword will not help you very much.")
+    print( "It is effective against castle people, but not against")
+    print( "monsters.")
+    print( "I will change it into something more powerful!")
+    input("")
+    input( var_un + ": Thanks!")
+    input( var_un + ": I also found an iron sword, a lance, a dagger, 3 amulets of life, and an amulet of something.")
+    print( "I dont remember the name of it.")
+    input("")
+    print( "Gwenda: In battle, you will choose an item to attack with.")
+    print( "Depending on which item you attack with, the chances of ")
+    print( "landing a hit, multiple hits, landing critical hits, and return damage ")
+    print( "are different.")
+    input( "")
+    print( "Gwenda: An iron sword will inflict 3 damage every hit.")
+    print( "with the possibility of hitting 3 times per attack.")
+    print( "The chance of return damage is about 40%.")
+    input("")
+    print( "Gwenda: Attacking with the lance, has a higher hit chance and more damage dealt per hit,")
+    print( "but you will only be able to hit the monster once per attack")
+    input("")
+    print( "Gwenda: Attacking with the dagger, has a low damage dealt per hit,")
+    print( "but since it is small and you will need to be close to the monster, ")
+    print( "it has a high chance of hitting multiple times causing massive damage.")
+    print( "Being close to a monster can also have a negative affect!")
+    input("")
+    print( "Gwenda: If you lose a battle and you have an amulet of life;")
+    print( "the amulet will restore your life.")
+    input( "")
+    input( "Gwenda: I must go find the warlock.")
+    print( "I have long suspected that the king was behind all of this.")
+    print( "The monsters came back to this area shorlty after he took the throne")
+    print( "and seem to protect the castle in a way...")
+    print("")
+    input( var_un + ": The monsters attacked the castle while I was in it!")
+    input( var_un + ": I can't imagine that the king has anything to do with this.")
+    input( "Gwenda: That may be what he wants you to think.")
+    input( "Gwenda: I will search the area for another reason why they are here.")
+    print( "If I can't find another warlock, then the king must be the one behind this. ")
+    input( "")
+    input( "Gwenda: I will meet up with you again someday...")
+
+    input( "")
+    input( var_un + ": Back to the forest to meet the wizard I guess")
+    print("")
+    input(".")
+    input("..")
+    input("...")
+    print("Noises in the forest")
+    input("")
+    if monsters_outside == 0:
+        input( var_un + ": I thought that monsters were all dead out here!")
+        
+    input( var_un + ": So I guess that I will get some practice in before the castle!")
+
+    input("")
+    print("You are near the edge of the battle swamp and the dark forest.")
+    print("")
+    if monsters_outside == 0:
+        input("The noise that you heard was another monster comming for you.")
+        monsters_outside = 1
+    else:
+        input("The noises that you heard, were the monsters comming for you.")  
+        input("They are lining up and will attack. and attack until thay are all defeated.")  
+
     return(var_health, var_monster_health, var_lives, monsters_outside,var_un, name)
 
 
 
+def the_way_back(var_un, name,var_health, var_monster_health, var_lives,var_wizard_side,var_warlock_side):
+    input("")
+    input( var_un + ": That wasn't too hard!")
+    input( var_un + ": I wonder if I can trust that witch.")
+    input( var_un + ": Wizard " + name  + " and her don't seem to tell the same story.")
+    print(" Both stories seem possible, but they can't both be true.")
+    input("")
+    print(" Or could they?")
+    input("")
+    print(" If the witches did cast the spell on the castle people,")
+    print(" why would she help me?")
+    input("")
+    print(" If the story that the wizard told me wasn't true,")
+    print(" that means that the warlocks are powerful enough to ")
+    print(" defeat the wizards.")
+    input("")
+    print(" How could I help them against someone that powerful?")
+    input(" ")
+    print( var_un + ": Or could the wizard be the one that is lying?")
+    input(" ")
+    print( var_un + ": I wonder what a warlock would have to say about this.")
+    input("")
+    print("Who should you trust? wizard, witch, or neither")
+    ff = input(" ")
+    if ff == 'wizard':
+        var_wizard_side +=2
+    elif ff == 'witch':
+        var_wizard_side +=3
+    elif ff=='neither':
+        var_warlock_side += 3
+    else:
+        var_warlock_side += -1
+    input(" ")
+    print("Wizard side: " + str(var_wizard_side) + " || Warlock side: " + str(var_warlock_side)) 
+    input("")
+    print( var_un +": I'm going to go with my gut on this one")
+    if var_wizard_side >= var_warlock_side:
+        
+        print(" and assume that both the wizard and witch are not evil.")
+        if ff == "witch":
+            print("Especialy that witch!")
+        elif ff == "wizard":    
+            print("Especialy " + name + "!")
+        else:
+            print("But should I trust them?") 
+    else:
+        print(" and say they are both confused!")  
+
+    input("")
+    print( var_un +": I need to hurry and find " + name + " before anymore monsters find me")
+    input("")
+    input(".")
+    input("..")
+    input("...")
+    if ff != "wizzard":
+        print( var_un + ": " + name + ", there you are!")
+        print("Wizard " + name + ": Is that what you call me now? ")
+        input( var_un + ": It's your name isn't it?")
+    else:
+        input( var_un + ": Wizard " + name + ", there you are!")
+
+    print("Wizard " + name + ": Did you find any supplies? ")  
+    input( var_un + ": Yes, I found a bunch of things.") 
+    print(" 2 swords, a lance, a dagger, and 2 types of amulets.")
+    input("")
+    print("Wizard " + name + ": What kind of amulets did you find?")
+    input("")
+    input( var_un + ": 3 amulets of life and one...")
+    print("That I don't remember the name of.")
+    input("")
+    print("Wizard " + name + ": That looks like... ")
+    input("")
+    input( var_un + ": The witch didn't know...")
+    input("Wizard " + name + ": Witch?")
+    input("")
+    input("Boom!")
+    input("")
+    print("Wizard " + name + ": That came from the castle.")
+    print("We must hurry")
+    input("")
+    print("Wizard " + name + ": I will set up a time trap.")
+    print("If I feel that you are in danger, I will send you")
+    print("back to this point in our journey!")
+    input("")
+    input( var_un + ": Sounds good!")
+    input("")
+    input("Boom!")
+    input("Crack!")
+    input("")
+    input( var_un + ": More monsters?")
+    print("Oh no!")
+    input("")
+    print("Wizard " + name + ": You take care of the monsters ")
+    print("and I will meet you inside.")
+    return (var_un, name,var_health, var_monster_health, var_lives,var_wizard_side,var_warlock_side)
+
+
+def the_battle_outside(var_un, name,var_health, var_monster_health, var_lives,var_wizard_side,var_warlock_side,source):
+    monsters_outside = (random.randint(2,5))
+    input("")
+    if source == 'inside':
+        input( var_un + ": He sent me back here!")
+        print("I know what is about to happen!")
+        print("I just wish it was after the monsters")
+        input("")
+
+    dialog = (random.randint(1,4))
+    if dialog ==1:
+        input( var_un + ": More monsters? I can do this!")
+    elif dialog == 2:
+        input( var_un + ": More monsters? I think this should be easy!")
+
+    elif dialog == 3:
+        input( var_un + ": MONSTERS, come out, come out") 
+        print("wherever you are!")   
+            
+    input("")
+    
+    while monsters_outside != 0:
+        var_monster_health += (random.randint(0,10))
+        (monsters_outside, var_lives, var_health) = battle(var_health, var_monster_health, var_lives, monsters_outside)
+    return(var_un, name,var_health, var_monster_health, var_lives,var_wizard_side,var_warlock_side)
+
+    
 
 
 
 
 
+(var_un, name,var_health, var_monster_health, var_lives,var_wizard_side,var_warlock_side) = the_way_back(var_un, name,var_health, var_monster_health, var_lives,var_wizard_side,var_warlock_side)
 
+(var_un, name,var_health, var_monster_health, var_lives,var_wizard_side,var_warlock_side)=the_battle_outside(var_un, name,var_health, var_monster_health, var_lives,var_wizard_side,var_warlock_side,'outside')
+exit()
 
-
-
-
-
-
-
-(var_un, name, var_health) = escape_the_castle(var_health,var_potion) 
+(var_un, name, var_health,var_wizard_side,var_warlock_side) = escape_the_castle(var_health,var_potion,var_wizard_side,var_warlock_side)
+print("Wizard side: " + str(var_wizard_side) + " || Warlock side: " + str(var_warlock_side)) 
 quit = input("Do you want to quit here? yes or no: ")
 if quit == "yes":
     exit()
-(var_health, var_monster_health, var_lives, monsters_outside,var_un, name) = dark_forest(var_health, var_monster_health, var_lives, monsters_outside,var_un, name)
+(var_health, var_monster_health, var_lives, monsters_outside,var_un, name,var_wizard_side,var_warlock_side) = dark_forest(var_health, var_monster_health, var_lives, monsters_outside,var_un, name,var_wizard_side,var_warlock_side)
+print("Wizard side: " + str(var_wizard_side) + " || Warlock side: " + str(var_warlock_side)) 
 quit = input("Do you want to quit here? yes or no: ")
 if quit == "yes":
     exit()
-searching_for_supplies(var_un, name,var_health, var_monster_health, var_lives, monsters_outside )
+searching_for_supplies(var_un, name,var_health, var_monster_health, var_lives, monsters_outside,var_wizard_side,var_warlock_side)
+print("Wizard side: " + str(var_wizard_side) + " || Warlock side: " + str(var_warlock_side))    
 quit = input("Do you want to quit here? yes or no: ")
 if quit == "yes":
     exit()
@@ -1020,15 +1252,19 @@ if quit == "yes":
 quit = input("Do you want to quit here? yes or no: ")
 if quit == "yes":
     exit()
-(var_health, var_monster_health, var_lives, monsters_outside,var_un, name) = learning_the_way(var_health, var_monster_health, var_lives, monsters_outside,var_un, name)
+(var_health, var_monster_health, var_lives, monsters_outside,var_un, name) = learning_the_way(var_health, var_monster_health, var_lives, monsters_outside,var_un, name,backpack_list)
+input("Press enter to continue... ")
+print("***** LEVEL VI ******")
+print("**** The Attack *****")
+input("Press enter to continue... ")
 
 
-(backpack_list) = maze()  
-quit = input("Do you want to quit here? yes or no: ")
-if quit == "yes":
-    exit()
 
-battle(var_health, var_monster_health, var_lives, monsters_outside)
+(monsters_outside, var_lives, var_health) = battle(var_health, var_monster_health, var_lives, monsters_outside)
+
+
+(var_un, name,var_health, var_monster_health, var_lives,var_wizard_side,var_warlock_side) = the_way_back(var_un, name,var_health, var_monster_health, var_lives,var_wizard_side,var_warlock_side)
+(var_un, name,var_health, var_monster_health, var_lives,var_wizard_side,var_warlock_side)=the_battle_outside(var_un, name,var_health, var_monster_health, var_lives,var_wizard_side,var_warlock_side,'outside')
 
 
 
