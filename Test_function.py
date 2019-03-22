@@ -7,30 +7,26 @@ var_monster_health = 30
 var_lives = 3
 var_potion = 1
 var_un = "bobo"
-name = "Chaps"
+name = "Kaebnevar"
 var_wizard_side = 0
 var_warlock_side = 0 
 backpack_list = ""
 import numpy as np
+
+input("Press enter to continue... ")
+print("****** LEVEL I ******")
+print("**** The Castle *****")
+input("Press enter to continue... ")
+
 def lowercase(x):
     x =x.lower()
     return x
 
-
 def escape_the_castle(var_health,var_potion,var_wizard_side,var_warlock_side):
 
-    
-      
     print('It is a cold stormy night...')
     print('In the forest lives monsters. The monsters are prepairing to storm the castle.')
     print('The castle is doomed and only you can save it')
-
-    input("Press enter to continue... ")
-    print("****** LEVEL I ******")
-    print("**** The Castle *****")
-    input("Press enter to continue... ")
-
-
     while 1:
         print("You will need a username to continue.")
         print("Enter your username: ")
@@ -44,34 +40,21 @@ def escape_the_castle(var_health,var_potion,var_wizard_side,var_warlock_side):
         if var_response =='yes':
             var_warlock_side += 1
             break
-        
         elif var_response =='no':
             var_wizard_side += 1
             break
-        
     if var_response != 'no':
         var_health += -1
         input('All but 3 knights have been defeated they are too strong. Lose 1 health.')
         input('Your health is now ' + str(var_health))
-    print('The castle is also the home of a powerful wizard.')
-    
-    while 1:
-        print("Please enter a  wizard name: ")
-        name = input(' ')
-        if name != "":
-            break
-    input(name + ' is a powerful wizard')
-    
+    print('The castle is also the home of the powerful wizard ' + name + '.' )
     if var_health !=10:
         input(name + ' has a potion to restore health...')
-       
         input('The potion may increase your health up to 10')
-        
         print("Do you want to use it?: yes or no")
         if input(' ' ) =='yes':
             var_health = 10
             var_potion += -1
-    
     input('Oh no! the monsters broke through the gate')
     print("Would you like to run to the back exit?: yes or no")
     x = input(' ')
@@ -83,14 +66,11 @@ def escape_the_castle(var_health,var_potion,var_wizard_side,var_warlock_side):
         if x=='no':
             input('GAME OVER!!!')
             exit()
-    
-    
+
     while 1:
         print("Would you like to evacuate the castle?: yes or no")
         r = input('')
-    
         if r == "yes":
-    
             y=(random.randint(1,3))
             
             if y == 1:
@@ -111,10 +91,7 @@ def escape_the_castle(var_health,var_potion,var_wizard_side,var_warlock_side):
             else:
                 input('You and the wizard escaped!')
             break        
-        else:
-    
-            
-               
+        else: 
             y=str((random.randint(1,5)))
             if y == '1':
                 var_object = "a barrel of gunpowder."
@@ -128,9 +105,7 @@ def escape_the_castle(var_health,var_potion,var_wizard_side,var_warlock_side):
                 var_object = "a cannon"   
             var_health += -2
             input("A monster found you hiding behind " +var_object+ " Luckily, you got a way and only lost 2 health.")
-            
             if var_health < 1:
-    
                 input("Wizard " + name + ": You were brave " + var_un + "! Luck was not with you on this adventure")
                 input("Wizard " + name + ": I will find a potion to turn back time.")
                 input("Wizard " + name + ": A time before the monsters entered the castle.")
@@ -138,15 +113,11 @@ def escape_the_castle(var_health,var_potion,var_wizard_side,var_warlock_side):
                 input("Game over")
                 exit()
             input("Wizard " + name + ": Your health is: " + str(var_health))
-           
-            
     input(" ")
-    return (var_un, name, var_health,var_wizard_side,var_warlock_side)
-def dark_forest(var_health, var_monster_health, var_lives, monsters_outside, var_un, name,var_wizard_side,var_warlock_side):#(var_health, var_monster_health, var_lives, monsters_outside,var_un, name)
-    input("Press enter to continue... ")
-    print("****** LEVEL II ******")
-    print("** The Dark Forest ***")
 
+    return (var_un, name, var_health,var_wizard_side,var_warlock_side)
+
+def dark_forest(var_health, var_monster_health, var_lives, monsters_outside, var_un, name,var_wizard_side,var_warlock_side):#(var_health, var_monster_health, var_lives, monsters_outside,var_un, name)
     input(" ")
     print("Wizard " + name + ": What would you like to do now?: ")
     x=input(" ")
@@ -171,7 +142,6 @@ def dark_forest(var_health, var_monster_health, var_lives, monsters_outside, var
     monsters_outside = 5
     input("The monsters are chasing you!")
     while 1:
-
         print("Should you hide or attack with " + weapon +"?: hide or attack")
         x=input(" ")
         if x== 'hide':
@@ -201,10 +171,6 @@ def dark_forest(var_health, var_monster_health, var_lives, monsters_outside, var
                 exit()
             input("Wizard " + name + ": Your health is: " + str(var_health))
             break
-        
-        
-       
-    
     input("Wizard " +name+": We are both still alive...")
     input(var_un+": YEAH, it was close though.")
     input("Wizard " +name+": so true...")
@@ -222,11 +188,8 @@ def dark_forest(var_health, var_monster_health, var_lives, monsters_outside, var
     input("Back in the cold stormy forest...")
     input(var_un +  ": lets get back to the castle to fight some monsters!")
     input("Wizard " + name + ": Sure, but first we need to look for some supplies to fight these monsters out here")
-    input(" ")                     
-    print("****** LEVEL II ******")
-    print("** The Dark Forest 2 *")
+    input(" ") 
     input(" ")
-    
     if x =='attack':
         weapons = 0
     else:
@@ -234,7 +197,6 @@ def dark_forest(var_health, var_monster_health, var_lives, monsters_outside, var
     input("wizard " +name+": We have " + str(weapons) + " weapon(s).")
     r ="yes"
     backpack = ["","","" ]
-    
     while r != "no":
         print("Wizard " + name +": If we find Mandrake Root, Moleyarrow, and Nostrix, ")
         print("        I can make a potion to defeat the monsters out here.")
@@ -243,7 +205,6 @@ def dark_forest(var_health, var_monster_health, var_lives, monsters_outside, var
         if r == 'no':
             var_warlock_side += 1
             break
-        
         items_list = ["an apple! They are delicious, they only give you ", "a radish! Although they are small, they still give you ", " a suit of armor! This will give you ", "a monster hide! This will give you ", "a monsters empty nest! At least you can move on and lose ", "a poison berry, Yuck! lose ", "oh no! a cave with monsters, you lose " , "a thorn bush, ouch! That took away ","Mandrake ","Moleyarrow ","Nostrix "]
         y=str((random.randint(0,10)))
         if y == '0':
@@ -301,8 +262,6 @@ def dark_forest(var_health, var_monster_health, var_lives, monsters_outside, var
                     x2 = str((random.randint(0,5)))
                     if x2 in ('2','4'):
                         input("Wizard " + name + ": That didn't work properly. We must continue to search.")
-                        
-     
                     else:
                         input("All monster outside of the castle are now defeated!")
                         monsters_outside = 0
@@ -313,7 +272,6 @@ def dark_forest(var_health, var_monster_health, var_lives, monsters_outside, var
         if x3 == 'yes':
             for items in backpack:
                 print(items)
-    
     input("Wizard " + name + ": There are " + str(monsters_outside) + " monsters out here. ")     
     input( var_un + ": Let's hurry back to the castle to save everyone else!")     
     if monsters_outside > 0:
@@ -341,21 +299,9 @@ def dark_forest(var_health, var_monster_health, var_lives, monsters_outside, var
                 if y == "yes":
                     exit()
                     break
-        
-                     
-       
-    
-    input(" ")
-    print("****** LEVEL III ******")
-    print(" ** The journey back **")
-    input("")
-    
     input ("Headed back to the castle with "+str(monsters_outside)+" monsters chasing you!")
-    
+
     return(var_health, var_monster_health, var_lives, monsters_outside,var_un, name,var_wizard_side,var_warlock_side)
-    
-
-
 
 def searching_for_supplies(var_un, name,var_health, var_monster_health, var_lives, monsters_outside,var_wizard_side,var_warlock_side):
     input("Wizard " + name + ": You have shown some great strength out here.")
@@ -400,13 +346,6 @@ def searching_for_supplies(var_un, name,var_health, var_monster_health, var_live
     input(".")
     input("..")
     input("...")
-
-
-    print("****** LEVEL III ******")
-    print("**** The Battle Swamp *****")
-    input("Press enter to continue... ")
-
-
     input( var_un + ": This place is creepy.")
     input( "Swamp Noises?: kiiick chiiick... kih kih ...")
     input( var_un + ": What was that?")
@@ -503,20 +442,10 @@ def searching_for_supplies(var_un, name,var_health, var_monster_health, var_live
     input( "Gwenda: If you are able to find your way through the graveyard,")
     print( "you will find six items.")
     input( "Gwenda: Walk through the enterence and i will meet you by the exit on the north wall.")
-    input("Press enter to continue... ")
-    print("****** LEVEL IV ******")
-    print("****** The Maze ******")
-    input("Press enter to continue... ")
-    
-
-
-
 
 def maze():
   location_list = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56)
   wall_list = (1, 2, 4, 5, 6, 7, 8, 9, 16, 17, 24, 25, 32, 33, 40, 41, 48, 49, 51, 52, 53, 54, 55, 56)
-
-    
   north_wall_list = (51,52,53,54,55)
   east_wall_list = (16,24,32,40,48,56)
   south_wall_list= (2,4,5,6,7)
@@ -524,13 +453,10 @@ def maze():
   tree_list = (27,31,45)
   grave_list = (10,13,34,46)
   wet_area_list = (15,18,30,42,47)
-  
-  
   inside_list = np.setdiff1d(location_list,wall_list, assume_unique=True)
   tomb_list = (19,20,22,23,26,28,38,43)
                   #  ||Rusty Sword || Missing || Iron sword || Dagger || Amulet of life 2 of 3 || Amulet of Unknown ||
   backpack_list = ['Rusty Sword' , 'Missing', 'Lance', 'Missing', 'Missing', 'Missing']
-
   x = 19
   #if x in location_list:
   # print(location_list)
@@ -549,7 +475,6 @@ def maze():
     missing_items =  amulet_of_life1 + amulet_of_life2 + amulet_of_life3  + iron + dagger + amulet_of_de
     print("------------------------------------Choose a direction------------------------------------")
     response = input("|| North = 8 || East = 6 || South = 2 || West = 4 || bp = Backpack contents || ")
-   
     response = lowercase(response)
     if response == "bp":
         s = (str(backpack_list)[1:-1])
@@ -560,10 +485,8 @@ def maze():
         string3=s
         string_length=len(string3)   # will be adding 10 extra spaces
         string_revised=bp.center(string_length)
-
         print(string_revised)
         print(s)
-        
 
     elif response in ('2','4','6','8'):
         if int(response) ==8:
@@ -650,11 +573,6 @@ def maze():
                         location = new_location
                         #new_location = 0            
                 break
-
-
-
-
-
 
         elif new_location in grave_list:
             print("You found a grave!")
@@ -822,22 +740,13 @@ def maze():
         else:
             location = new_location
             new_location = 0
-
-        #print(location)
-
     print("Your current location is: " + str(location))
     
-    
     if response not in ('2','4','6','8','bp','exit'):
-        print("Invalid response, no movement was taken.")   
-
-
+        print("Invalid response, no movement was taken.") 
   return(backpack_list)
 
-
-
 def attack(weapon):
-    
     print(weapon)
     random_hits = randint(0, 3)
     random_crit_damage=randint(1, 5)
@@ -845,20 +754,16 @@ def attack(weapon):
     random_return_health =randint(1, 8)
     random_return_movement =randint(1, 8)
     return_damage = 0
-
     if str(random_crit_damage) in ('2','4'):
         random_crit_damage = 2
     else:
         random_crit_damage = 1
-
-
     if str(random_return_health) in ('2','4'):
         return_health = 2
     elif str(random_return_health) in ('2','4', '6'):
         return_health = 1
     else:
         return_health = 0
-
     var_hit_damage = 0
     random_hits = 0
     if weapon == "silver sword":
@@ -884,7 +789,6 @@ def attack(weapon):
     else:
         print("Weapon not found")
         return_damage = 8
-        
     var_total_damage = var_hit_damage * random_hits * random_crit_damage
     print("You struck a total of " + str(random_hits) + " hits with a total damage of " + str(var_total_damage))
 
@@ -940,14 +844,7 @@ def attack(weapon):
             return_movement = "To avoid taking any damage, you attacked the monster again with your lance +5 damage. Then you ran to the closest tree." + return_health_text
             var_total_damage +=5
 
-
-
     return (var_total_damage, random_hits, return_damage, return_health, return_movement)
-
-
-
-
-
 
 def battle(var_health, var_monster_health, var_lives, monsters_outside):
  
@@ -974,7 +871,6 @@ def battle(var_health, var_monster_health, var_lives, monsters_outside):
                 input(str(monsters_outside) + " monsters remain in the 'Dark Forest'!")
             else:
                 input(str(monsters_outside) + " monster remains in the Dark Forest'!")
-                    
             break
         if var_health < 1:
             input("The monster was too strong! You lost.")
@@ -988,30 +884,11 @@ def battle(var_health, var_monster_health, var_lives, monsters_outside):
                 var_health = 10
             else:
                 input("Game over!")
-                exit()    
-              
+                exit()
         print("Monster health: " + str(var_monster_health) + " || Your health: " + str(var_health) )
     print(" || Your health: " + str(var_health) +  " ||" )
     return(monsters_outside, var_lives, var_health)
     #exit()
-
-
-
-
-
-
-
-
-
-
-def the_quick_way_back(var_un, name,var_health, var_monster_health, var_lives, monsters_outside ):
-    input("")
-
-
-    
-
-
-
 
 def looking_for_monsters(var_health, var_monster_health, var_lives, monsters_outside):
     input("")
@@ -1019,11 +896,6 @@ def looking_for_monsters(var_health, var_monster_health, var_lives, monsters_out
 
 def learning_the_way(var_health, var_monster_health, var_lives, monsters_outside,var_un, name,backpack_list):
     #print(str(var_health)+ str(var_monster_health)+ str(var_lives)+ str(monsters_outside)+str(var_un)+ str(name))
-    input("Press enter to continue... ")
-    print("****** LEVEL V ******")
-    print("*** The Training ****")
-    input("Press enter to continue... ")
-
     input( "Gwenda: You made it through the graveyard!")
     input( "Gwenda: Let's see what you found.")
     print("||Rusty Sword || Iron sword || Lance || Dagger || Amulet of life 3 of 3 || Amulet of Unknown ||")
@@ -1070,7 +942,6 @@ def learning_the_way(var_health, var_monster_health, var_lives, monsters_outside
     print( "If I can't find another warlock, then the king must be the one behind this. ")
     input( "")
     input( "Gwenda: I will meet up with you again someday...")
-
     input( "")
     input( var_un + ": Back to the forest to meet the wizard I guess")
     print("")
@@ -1081,7 +952,6 @@ def learning_the_way(var_health, var_monster_health, var_lives, monsters_outside
     input("")
     if monsters_outside == 0:
         input( var_un + ": I thought that monsters were all dead out here!")
-        
     input( var_un + ": So I guess that I will get some practice in before the castle!")
 
     input("")
@@ -1092,14 +962,10 @@ def learning_the_way(var_health, var_monster_health, var_lives, monsters_outside
         monsters_outside = 1
     else:
         input("The noises that you heard, were the monsters comming for you.")  
-        input("They are lining up and will attack. and attack until thay are all defeated.")  
-
+        input("They are lining up and will attack. and attack until thay are all defeated.")
     return(var_health, var_monster_health, var_lives, monsters_outside,var_un, name)
 
-
-
 def the_way_back(var_un, name,var_health, var_monster_health, var_lives,var_wizard_side,var_warlock_side):
-    input("")
     input( var_un + ": That wasn't too hard!")
     input( var_un + ": I wonder if I can trust that witch.")
     input( var_un + ": Wizard " + name  + " and her don't seem to tell the same story.")
@@ -1144,8 +1010,7 @@ def the_way_back(var_un, name,var_health, var_monster_health, var_lives,var_wiza
         else:
             print("But should I trust them?") 
     else:
-        print(" and say they are both confused!")  
-
+        print(" and say they are both confused!") 
     input("")
     print( var_un +": I need to hurry and find " + name + " before anymore monsters find me")
     input("")
@@ -1158,7 +1023,6 @@ def the_way_back(var_un, name,var_health, var_monster_health, var_lives,var_wiza
         input( var_un + ": It's your name isn't it?")
     else:
         input( var_un + ": Wizard " + name + ", there you are!")
-
     print("Wizard " + name + ": Did you find any supplies? ")  
     input( var_un + ": Yes, I found a bunch of things.") 
     print(" 2 swords, a lance, a dagger, and 2 types of amulets.")
@@ -1203,66 +1067,175 @@ def the_battle_outside(var_un, name,var_health, var_monster_health, var_lives,va
         print("I know what is about to happen!")
         print("I just wish it was after the monsters")
         input("")
-
     dialog = (random.randint(1,4))
     if dialog ==1:
         input( var_un + ": More monsters? I can do this!")
     elif dialog == 2:
         input( var_un + ": More monsters? I think this should be easy!")
-
     elif dialog == 3:
         input( var_un + ": MONSTERS, come out, come out") 
         print("wherever you are!")   
-            
     input("")
-    
     while monsters_outside != 0:
         var_monster_health += (random.randint(0,10))
         (monsters_outside, var_lives, var_health) = battle(var_health, var_monster_health, var_lives, monsters_outside)
     return(var_un, name,var_health, var_monster_health, var_lives,var_wizard_side,var_warlock_side)
 
+def the_castle():
+    #exterior walls
+    north_wall_list = [402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 414, 415, 416, 417, 418, 419,781, 782, 783, 784, 785, 786, 787, 788, 789, 790, 791, 792, 793, 794, 795, 796, 797, 798, 799, 800]
+    south_wall_list =[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    east_wall_list = [761,741, 721, 701, 681, 661, 641, 621, 601, 581, 561, 541, 521, 501, 481, 461, 441, 421, 401, 381, 361, 341, 321, 301, 281, 261, 241, 221, 201, 181, 161, 141, 121, 101, 81, 61, 41, 21]
+    west_wall_list = [780, 760, 740, 720, 700, 680, 660, 640, 620, 600, 580, 560, 540, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 80,  60, 40]
+    all_exteriror_wall_list = list(set(north_wall_list + south_wall_list + east_wall_list  + west_wall_list)) 
+    #interior walls
+    downstairs_wall_list = [62, 63, 64, 65, 66, 67, 68, 124, 104, 84, 122, 128, 108, 88, 168, 182, 183, 184, 185, 186, 187, 188, 72, 73, 74, 75, 77, 78, 79, 192, 212, 213, 214, 215, 216, 217, 218, 219, 302, 303, 304, 305, 306, 307, 308, 309, 349, 329, 389, 392, 372, 352, 332, 312, 394, 374, 354, 334, 314, 315, 317, 318, 319]
+    upstairs_wall_list = [512, 492, 472, 452, 432, 514, 494, 474, 434, 522, 523, 524, 525, 526, 528, 529, 530, 531, 532, 534, 535, 536, 537, 538, 539, 646, 626, 606, 586, 546, 656, 636, 616, 596, 576, 556, 657, 659, 662, 663, 664, 665, 666, 667, 668, 669, 670, 671, 673, 674, 765, 745, 705, 685, 774, 754, 734, 714, 694]
+    all_interior_wall_list = list(set(downstairs_wall_list  + upstairs_wall_list)) 
+    #all walls
+    all_wall_list = list(set(all_exteriror_wall_list  + all_interior_wall_list)) 
+    play_area_list = []
+    for i in range(1,801,1):    
+        play_area_list.append(i)
+    floor_first_floor_list = []   
+    for i in range(1,421,1):    
+        floor_first_floor_list.append(i)
+    floor_second_floor_list = []
+    for i in range(421,801,1):    
+        floor_second_floor_list.append(i)   
+            
+    room_kitchen_list = [148,162, 163, 164, 165, 166, 167,
+          142, 143, 144, 145, 146, 147,
+          122, 123, 124, 125, 126, 127,
+          102, 103, 104, 105, 106, 107,
+          82, 83, 84, 85, 86, 87]
+    room_pantry_list = [123,102, 103, 82, 83]
+    room_entryway_list = [10,211, 189, 190, 191, 169, 170, 171, 149, 150, 151, 129, 130, 131, 109, 110, 111, 89, 90, 91, 69, 70, 71, 49, 50, 51, 29, 30, 31, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39]
+    room_throne_room_list = [172,193, 194, 195, 196, 197, 198, 199,
+            173, 174, 175, 176, 177, 178, 179,
+            153, 154, 155, 156, 157, 158, 159,
+            133, 134, 135, 136, 137, 138, 139,
+            113, 114, 115, 116, 117, 118, 119,
+            93 , 94, 95,  96,  97,  98,  99]
+    room_great_hall_list = [282,  283, 284, 285, 286, 287, 288, 289, 290,
+            262, 263, 264, 265, 266, 267, 26, 269, 270,
+            242, 243, 244, 245, 246, 247, 24, 249, 250,
+            222, 223, 224, 225, 226, 227, 22, 229, 230,
+            202, 203, 204, 205, 206, 207, 20, 209, 210]
+    room_minstrels_gallery_list=[291, 292, 293, 294, 295, 296, 297, 298, 299,
+            271, 272, 273, 274, 275, 276, 277, 278, 279,
+            251, 252, 253, 254, 255, 256, 257, 258, 259,
+            231, 232, 233, 234, 235, 236, 237, 238, 239]
+    room_minor_hall_list_ds = [390, 391, 370, 371, 350, 351, 330, 331, 310, 311]
+    room_buttery_list = [369,382, 383, 384, 385, 386, 387, 388, 362, 363, 364, 365, 366, 367, 368, 342, 343, 344, 345, 346, 347, 348, 322, 323, 324, 325, 326, 327, 328]
+    room_place_of_arms_list = [316,395, 396, 397, 398, 399, 375, 376, 377, 378, 379, 355, 356, 357, 358, 359, 335, 336, 337, 338, 339]
+    room_stairs_list = [393, 373, 353, 333, 313]
+    room_minor_hall_list_us = [533, 513, 493, 473, 453, 433, 413]
+    room_locked_room_1_list = [454, 515, 516, 517, 518, 519, 495, 496, 497, 498, 499, 475, 476, 477, 478, 479, 455, 456, 457, 458, 459, 435, 436, 437, 438, 439]
+    room_locked_room_2_list = [527, 502, 503, 504, 505, 506, 507, 508, 509, 510, 511, 482, 483, 484, 485, 486, 487, 488, 489, 490, 491, 462, 463, 464, 465, 
+            466, 467, 468, 469, 470, 471, 442, 443, 444, 445, 446, 447, 448, 449, 450, 451, 422, 423, 424, 425, 426, 427, 428, 429, 430, 431]
+    room_locked_room_3_list = [566, 642, 643, 644, 645, 622, 623, 624, 625, 602, 603, 604, 605, 582, 583, 584, 585, 562, 563, 564, 565, 542, 543, 544, 545]
+    room_mezanine_list = [647, 648, 649, 650, 651, 652, 653, 654, 655,
+            627, 628, 629, 630, 631, 632, 633, 634 ,635,
+            607, 608, 609, 610, 611, 612, 613, 614, 615,
+            587, 588, 589, 590, 591, 592, 593, 594, 595,
+            567, 568, 569, 570, 571, 572, 573, 574, 575,
+            547, 548, 549, 550, 551, 552, 553, 554, 555]
+    room_bower_list = [658, 637, 638, 639, 617, 618, 619, 597, 598, 599, 577, 578, 579, 557, 558, 559]
+    room_garden_rob_list = [725, 762, 763, 764, 742, 743, 744, 722, 723, 724, 702, 703, 704, 682, 683, 684]
+    room_chamber_room_list = [672, 766, 767, 768, 769, 770, 771, 772, 773,
+        746, 747, 748, 749, 750, 751, 752, 753,
+        726, 727, 728, 729, 730, 731, 732, 733,
+        706, 707, 708, 709, 710, 711, 712, 713,
+        686, 687, 688, 689, 690, 691, 692, 693]
+    room_wardrobe_list = [775, 776, 777, 778, 779,
+        755, 756, 757, 758, 759,
+        735, 736, 737, 738, 739,
+        715, 716, 717, 718, 719,
+        695, 696, 697, 698, 699,
+        675, 676, 677, 678, 679]
+
+
+     
+
+    #all_room_list = list(set(room_kitchen_list+room_pantry_list +room_entryway_list +room_throne_room_list +room_great_hall_list+
+    #    room_minstrels_gallery_list+room_minor_hall_list_ds+room_buttery_list+room_place_of_arms_list+room_stairs_list+
+    #   room_minor_hall_list_us+room_locked_room_1_list+room_locked_room_2_list+room_locked_room_3_list+room_mezanine_list+room_bower_list+room_garden_rob_list+room_chamber_room_list+room_wardrobe_list)) 
+    #
+    
+    response = ""
+    location = 10
+    new_location = 10
+    while response != 'exit':
+        response = input("|| North = 8 || East = 6 || South = 2 || West = 4 || m = Map || ")
+        response = lowercase(response)
+        if response not in ('2','4','6','8'):
+            print("")
+        elif response in ('2','4','6','8'):
+            if int(response) ==8:
+                print("moving north")
+                new_location = location + 20
+            elif int(response) ==6:
+                print("moving east")
+                new_location = location + 1
+            elif int(response) ==2:
+                print("moving south")
+                new_location = location - 20
+            elif int(response) == 4:
+                print("moving west")
+                new_location = location - 1
+
+            if new_location not in all_wall_list:
+                w = next(n for n,v in filter(lambda t: isinstance(t[1],list), locals().items()) if new_location in v)
+                #w = next(n for n,v in filter(lambda t: isinstance(t[1],list) and t[0].startswith('room_'), locals().items()) if new_location in v)
+                location =new_location
+
+                print(w + " " + str(location))
+            else:
+                print("You found a wall and can't go that way!")    
     
 
 
+    exit()
 
 
 
-(var_un, name,var_health, var_monster_health, var_lives,var_wizard_side,var_warlock_side) = the_way_back(var_un, name,var_health, var_monster_health, var_lives,var_wizard_side,var_warlock_side)
+the_castle()
 
-(var_un, name,var_health, var_monster_health, var_lives,var_wizard_side,var_warlock_side)=the_battle_outside(var_un, name,var_health, var_monster_health, var_lives,var_wizard_side,var_warlock_side,'outside')
-exit()
+#(var_un, name,var_health, var_monster_health, var_lives,var_wizard_side,var_warlock_side) = the_way_back(var_un, name,var_health, var_monster_health, var_lives,var_wizard_side,var_warlock_side)
+#(var_un, name,var_health, var_monster_health, var_lives,var_wizard_side,var_warlock_side)=the_battle_outside(var_un, name,var_health, var_monster_health, var_lives,var_wizard_side,var_warlock_side,'outside')
+#exit()
 
 (var_un, name, var_health,var_wizard_side,var_warlock_side) = escape_the_castle(var_health,var_potion,var_wizard_side,var_warlock_side)
-print("Wizard side: " + str(var_wizard_side) + " || Warlock side: " + str(var_warlock_side)) 
-quit = input("Do you want to quit here? yes or no: ")
-if quit == "yes":
-    exit()
+input("Press enter to continue... ")
+print("****** LEVEL II ******")
+print("** The Dark Forest ***")
+input("Press enter to continue... ")
 (var_health, var_monster_health, var_lives, monsters_outside,var_un, name,var_wizard_side,var_warlock_side) = dark_forest(var_health, var_monster_health, var_lives, monsters_outside,var_un, name,var_wizard_side,var_warlock_side)
-print("Wizard side: " + str(var_wizard_side) + " || Warlock side: " + str(var_warlock_side)) 
-quit = input("Do you want to quit here? yes or no: ")
-if quit == "yes":
-    exit()
+input("Press enter to continue... ")
+print("****** LEVEL III ******")
+print("**** The Battle Swamp *****")
+input("Press enter to continue... ")
 searching_for_supplies(var_un, name,var_health, var_monster_health, var_lives, monsters_outside,var_wizard_side,var_warlock_side)
-print("Wizard side: " + str(var_wizard_side) + " || Warlock side: " + str(var_warlock_side))    
-quit = input("Do you want to quit here? yes or no: ")
-if quit == "yes":
-    exit()
-  
+input("Press enter to continue... ")
+print("****** LEVEL IV ******")
+print("****** The Maze ******")
+input("Press enter to continue... ")
 (backpack_list) = maze()  
-quit = input("Do you want to quit here? yes or no: ")
-if quit == "yes":
-    exit()
+input("Press enter to continue... ")
+print("****** LEVEL V ******")
+print("*** The Training ****")
+input("Press enter to continue... ")
 (var_health, var_monster_health, var_lives, monsters_outside,var_un, name) = learning_the_way(var_health, var_monster_health, var_lives, monsters_outside,var_un, name,backpack_list)
 input("Press enter to continue... ")
 print("***** LEVEL VI ******")
 print("**** The Attack *****")
 input("Press enter to continue... ")
-
-
-
 (monsters_outside, var_lives, var_health) = battle(var_health, var_monster_health, var_lives, monsters_outside)
-
-
+input("Press enter to continue... ")
+print("***** LEVEL VII *****")
+print("**** The Meetup *****")
+input("Press enter to continue... ")
 (var_un, name,var_health, var_monster_health, var_lives,var_wizard_side,var_warlock_side) = the_way_back(var_un, name,var_health, var_monster_health, var_lives,var_wizard_side,var_warlock_side)
 (var_un, name,var_health, var_monster_health, var_lives,var_wizard_side,var_warlock_side)=the_battle_outside(var_un, name,var_health, var_monster_health, var_lives,var_wizard_side,var_warlock_side,'outside')
 
