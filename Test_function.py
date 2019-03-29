@@ -958,10 +958,10 @@ def learning_the_way(var_health, var_monster_health, var_lives, monsters_outside
     print("You are near the edge of the battle swamp and the dark forest.")
     print("")
     if monsters_outside == 0:
-        input("The noise that you heard was another monster comming for you.")
+        input("The noise that you heard was another monster coming for you.")
         monsters_outside = 1
     else:
-        input("The noises that you heard, were the monsters comming for you.")  
+        input("The noises that you heard, were the monsters coming for you.")  
         input("They are lining up and will attack. and attack until thay are all defeated.")
     return(var_health, var_monster_health, var_lives, monsters_outside,var_un, name)
 
@@ -1081,7 +1081,7 @@ def the_battle_outside(var_un, name,var_health, var_monster_health, var_lives,va
         (monsters_outside, var_lives, var_health) = battle(var_health, var_monster_health, var_lives, monsters_outside)
     return(var_un, name,var_health, var_monster_health, var_lives,var_wizard_side,var_warlock_side)
 
-def the_castle():
+def the_castle(var_un, name,var_health, var_monster_health, var_lives,var_wizard_side,var_warlock_side):
     #exterior walls
     exteriror_north_wall_list = [402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 414, 415, 416, 417, 418, 419,781, 782, 783, 784, 785, 786, 787, 788, 789, 790, 791, 792, 793, 794, 795, 796, 797, 798, 799, 800]
     exteriror_south_wall_list =[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
@@ -1118,10 +1118,10 @@ def the_castle():
             113, 114, 115, 116, 117, 118, 119,
             93 , 94, 95,  96,  97,  98,  99]
     room_great_hall_list = [282,  283, 284, 285, 286, 287, 288, 289, 290,
-            262, 263, 264, 265, 266, 267, 26, 269, 270,
-            242, 243, 244, 245, 246, 247, 24, 249, 250,
-            222, 223, 224, 225, 226, 227, 22, 229, 230,
-            202, 203, 204, 205, 206, 207, 20, 209, 210]
+            262, 263, 264, 265, 266, 267, 268, 269, 270,
+            242, 243, 244, 245, 246, 247, 248, 249, 250,
+            222, 223, 224, 225, 226, 227, 228, 229, 230,
+            202, 203, 204, 205, 206, 207, 208, 209, 210]
     room_minstrels_gallery_list=[291, 292, 293, 294, 295, 296, 297, 298, 299,
             271, 272, 273, 274, 275, 276, 277, 278, 279,
             251, 252, 253, 254, 255, 256, 257, 258, 259,
@@ -1162,49 +1162,214 @@ def the_castle():
     #    room_minstrels_gallery_list+room_minor_hall_list_ds+room_buttery_list+room_place_of_arms_list+room_stairs_list+
     #   room_minor_hall_list_us+room_locked_room_1_list+room_locked_room_2_list+room_locked_room_3_list+room_mezanine_list+room_bower_list+room_garden_rob_list+room_chamber_room_list+room_wardrobe_list)) 
     #
+    room_list =("room_kitchen_list", "room_pantry_list", "room_entryway_list", 
+    "room_throne_room_list", "room_great_hall_list", "room_minstrels_gallery_list", 
+    "room_minor_hall_list_ds", "room_buttery_list", "room_place_of_arms_list", 
+    "room_stairs_list", "room_minor_hall_list_us", "room_locked_room_1_list", 
+    "room_locked_room_2_list", "room_locked_room_3_list", "room_mezanine_list", 
+    "room_bower_list", "room_garden_rob_list", "room_chamber_room_list", 
+    "room_wardrobe_list")
+
     
+    description_list=("The kitchen is 'L' shaped with a large pantry. ", "The pantry is low on supplies, but has a fowel stench.","The Entryway is 'T' shaped and has many old paintings. There are several monsters slowly moving arround the first floor. Move quickly and quietly!",
+    "The Throne room is dark and appears to be empty.", "The Great Hall has several tables set up, and it is well lit. Besides 2 monsters that seem to be wounded, no one else is in here. Maybe the monsters are afraid of the light!", "The Minstrels gallery has many instruments left behind. It looks like everyone left in a hurry! You are close to the Place of arms.", 
+    "The Minor hall leads to the Buttery and the North entrerance", "The Buttery appears to be empty, but there are strange noises coming from the ceiling", "The Place of arms usualy contains weapons and supplies that may be helpful.", 
+    "The stairs are made of wood and make a creaking sound. Hopefully this doesn't attract problems", "The Minor hall leads to the Mezanine", "room_locked_room_1_list", 
+    "room_locked_room_2_list", "room_locked_room_3_list", "The Mezanine seems to be empty", 
+    "The Bower was intended for the Lady of the castle and was used as her private withdrawing-room and bedroom before she passed away.", "The Gardenrobe smells so bad! Why was it found inside the Solar? Yuck! Maybe we can find a chamber pot to attack the monsters with.", 
+    "The Chamber room also known here as the Solar is a suite of rooms that was extended to include a Wardrobe and Bower.", 
+    "The Wardrobe is where dressmaking and hairdressing is carried out. ")
     response = ""
     location = 10
+    bonus = ""
     new_location = 10
+    pickup = 0
+    key = 0 
+    torch = 0
+    torch_life = 50
+    kitchen_bonus1 = random.choice(room_kitchen_list)
+    kitchen_bonus2 = random.choice(room_kitchen_list)
+    pantry_bonus1 = random.choice(room_pantry_list)
+    throne_bonus1 = random.choice(room_throne_room_list)
+    if pantry_bonus1 == 102:
+        pantry_bonus1 = pantry_bonus1
+    else:
+        pantry_bonus1 = 0 
     while response != 'exit':
+        description = ""
+        bonus = ""
+       
+
+
+        monster_location = [random.choice(room_entryway_list),
+            random.choice(room_entryway_list),
+            random.choice(room_entryway_list),
+            random.choice(room_entryway_list),
+            random.choice(room_entryway_list),
+            random.choice(room_entryway_list) , 
+            random.choice(room_throne_room_list),
+            random.choice(room_throne_room_list),
+            random.choice(room_throne_room_list),
+            
+            random.choice(room_minstrels_gallery_list),
+            random.choice(room_minor_hall_list_ds),
+
+            random.choice(room_place_of_arms_list),
+            random.choice(room_place_of_arms_list),
+            random.choice(room_minor_hall_list_ds),
+            random.choice(room_buttery_list),
+            random.choice(room_stairs_list),
+
+            ]
+
+        if torch == 1:
+            monster_location.clear()
+            torch_life += -1
+        else:
+            torch_life = 50
+        if torch_life < 1:
+            torch = 0
+        
+        print(throne_bonus1)
+        
+
         response = input("|| North = 8 || East = 6 || South = 2 || West = 4 || m = Map || ")
+        
+        print("_______________________________________________________________")
         response = lowercase(response)
         if response not in ('2','4','6','8'):
             print("")
         elif response in ('2','4','6','8'):
             if int(response) ==8:
-                print("moving north")
+                direction = ("|| Direction: North")
                 new_location = location + 20
             elif int(response) ==6:
-                print("moving east")
+                direction = ("|| Direction: East")
                 new_location = location + 1
             elif int(response) ==2:
-                print("moving south")
+                direction = ("|| Direction: South")
                 new_location = location - 20
             elif int(response) == 4:
-                print("moving west")
+                direction = ("|| Direction: West")
                 new_location = location - 1
-
+            print (direction.ljust(300)[0:61] + "||")    
             if new_location not in all_wall_list:
                 w = next(n for n,v in filter(lambda t: isinstance(t[1],list), locals().items()) if new_location in v)
+
+                for i in [i for i,x in enumerate(room_list) if x == w]:
+                    description = description_list[int(i)]
                 #w = next(n for n,v in filter(lambda t: isinstance(t[1],list) and t[0].startswith('room_'), locals().items()) if new_location in v)
                 location =new_location
-
-                print(w + " " + str(location))
+                if location < 400:
+                    floor = 1
+                else:
+                    floor = 2    
+                room = w.replace("_"," ")
+                room = room.replace("room","")
+                room = room.replace("list","")
+                room = room.strip() + " || Location: " + str(location) 
+                
+                #|| North = 8 || East = 6 || South = 2 || West = 4 || m = Map || 63 chars
+                room = room.ljust(300)[0:40] + "||"
+                print("|| Floor: "+ str(floor) +" || Room: " + room.title())
+                #print("||" + description + "||")
             else:
                 if new_location in all_exteriror_wall_list:
                     r = next(n for n,v in filter(lambda t: isinstance(t[1],list) and t[0].startswith('exteriror_'), locals().items()) if new_location in v)
-                    print("You found the " + r + " and can't go that way.")
+                    if r == "exteriror_south_wall_list":
+                        w = "South wall"
+                    elif r == "exteriror_north_wall_list":
+                        w = "North wall"    
+                    elif r == "exteriror_east_wall_list":
+                        w = "East wall"    
+                    elif r == "exteriror_west_wall_list":
+                        w = "West wall"        
+                    description = ("Description: You found the " + w + ". Can't go that way.")
                 else:
-                    print("You found a wall and can't go that way!")    
-    
+                    description =("Description:  You found a wall. Can't go that way!") 
+        description = description            
+        #description = description.ljust(300)[0:61]
+        
+        step = 57
+        for i in range(0, len(description), 57):
+            slice = description[i:step]
+            step += 58  
+            print("|| " + slice.ljust(300)[0:57] + " ||")
+        if location == kitchen_bonus1:
+            kitchen_bonus1 = 0
+            bonus = ("You found a health coin!")
+            var_health += 1
+        elif location == kitchen_bonus2:
+            kitchen_bonus2 = 0
+            bonus = ("You found a health coin!")
+            var_health += 2    
+        elif location == pantry_bonus1:
+            pantry_bonus1 = 0
+            bonus = ("You found an amulet of life!")
+            var_lives += 1 
+        elif location == throne_bonus1 and key == 0:
+            pickup = 1
+            bonus = ("You found a key!") 
+        elif location == 48 and torch == 0:
+            pickup = 2
+            bonus = ("You found a torch!")       
 
+        elif location in monster_location:
+            bonus = ("A monster found you! You lost 3 health.")
+            var_health += -3
+
+        stats = "Amulets of life: " + str(var_lives) + " || Health: " + str(var_health)
+        if key ==1:
+            stats = stats + "|| Key: 1"
+        if torch ==1:
+            stats = stats + "|| Torch life: " + str(torch_life)    
+        pui = "Would you like to pick it up? yes or no: "
+        
+
+
+        print("|| " + stats.ljust(300)[0:57] + " ||")    
+        print("|| " + bonus.ljust(300)[0:57] + " ||")
+
+        print("---------------------------------------------------------------")    
+        print("")
+
+        if pickup == 1:
+            o = input(pui)
+            if o == 'yes':
+
+                key = 1
+                pickup = 0
+            else:
+                key = 0 
+                pickup = 0   
+        if pickup == 2:
+            o = input(pui)
+            if o == 'yes':
+
+                torch = 1
+                pickup = 0
+            else:
+                torch = 0 
+                pickup = 0          
+
+        if var_health < 1:
+            input("Too much damage.")
+            var_lives +=-1
+            if var_lives > 0:
+                input("Using the Amulet of life to regeneate health " + str(var_lives) + " remain")
+                input("Health restore to 10")
+                
+    
+                var_health = 10
+            else:
+                input("Game over!")
+                exit()
 
     exit()
 
 
 
-the_castle()
+the_castle(var_un, name,var_health, var_monster_health, var_lives,var_wizard_side,var_warlock_side)
 
 #(var_un, name,var_health, var_monster_health, var_lives,var_wizard_side,var_warlock_side) = the_way_back(var_un, name,var_health, var_monster_health, var_lives,var_wizard_side,var_warlock_side)
 #(var_un, name,var_health, var_monster_health, var_lives,var_wizard_side,var_warlock_side)=the_battle_outside(var_un, name,var_health, var_monster_health, var_lives,var_wizard_side,var_warlock_side,'outside')
