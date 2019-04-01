@@ -13,16 +13,17 @@ var_warlock_side = 0
 backpack_list = ""
 import numpy as np
 
-input("Press enter to continue... ")
-print("****** LEVEL I ******")
-print("**** The Castle *****")
-input("Press enter to continue... ")
+
 
 def lowercase(x):
     x =x.lower()
     return x
 
 def escape_the_castle(var_health,var_potion,var_wizard_side,var_warlock_side):
+    input("Press enter to continue... ")
+    print("****** LEVEL I ******")
+    print("**** The Castle *****")
+    input("Press enter to continue... ")
 
     print('It is a cold stormy night...')
     print('In the forest lives monsters. The monsters are prepairing to storm the castle.')
@@ -1155,7 +1156,7 @@ def the_castle(var_un, name,var_health, var_monster_health, var_lives,var_wizard
         695, 696, 697, 698, 699,
         675, 676, 677, 678, 679]
 
-
+    locked_doors_list = [454, 527, 566]
      
 
     #all_room_list = list(set(room_kitchen_list+room_pantry_list +room_entryway_list +room_throne_room_list +room_great_hall_list+
@@ -1187,10 +1188,14 @@ def the_castle(var_un, name,var_health, var_monster_health, var_lives,var_wizard
     key = 0 
     torch = 0
     torch_life = 50
+    wizard_floor1_count = 0
+    witch_floor2_count = 0
+    kings_body = 0
     kitchen_bonus1 = random.choice(room_kitchen_list)
     kitchen_bonus2 = random.choice(room_kitchen_list)
     pantry_bonus1 = random.choice(room_pantry_list)
     throne_bonus1 = random.choice(room_throne_room_list)
+    throne_bonus2 = random.choice(room_throne_room_list)
     if pantry_bonus1 == 102:
         pantry_bonus1 = pantry_bonus1
     else:
@@ -1198,8 +1203,10 @@ def the_castle(var_un, name,var_health, var_monster_health, var_lives,var_wizard
     while response != 'exit':
         description = ""
         bonus = ""
-       
+        
 
+       
+        throne_bonus2 = random.choice(room_throne_room_list)
 
         monster_location = [random.choice(room_entryway_list),
             random.choice(room_entryway_list),
@@ -1253,7 +1260,7 @@ def the_castle(var_un, name,var_health, var_monster_health, var_lives,var_wizard
                 direction = ("|| Direction: West")
                 new_location = location - 1
             print (direction.ljust(300)[0:61] + "||")    
-            if new_location not in all_wall_list:
+            if new_location not in all_wall_list and (new_location not in locked_doors_list):
                 w = next(n for n,v in filter(lambda t: isinstance(t[1],list), locals().items()) if new_location in v)
 
                 for i in [i for i,x in enumerate(room_list) if x == w]:
@@ -1285,6 +1292,9 @@ def the_castle(var_un, name,var_health, var_monster_health, var_lives,var_wizard
                     elif r == "exteriror_west_wall_list":
                         w = "West wall"        
                     description = ("Description: You found the " + w + ". Can't go that way.")
+                elif new_location in locked_doors_list:
+
+                    description =("Description:  You found a locked door behind a painting. Can't go that way!") 
                 else:
                     description =("Description:  You found a wall. Can't go that way!") 
         description = description            
@@ -1310,9 +1320,27 @@ def the_castle(var_un, name,var_health, var_monster_health, var_lives,var_wizard
         elif location == throne_bonus1 and key == 0:
             pickup = 1
             bonus = ("You found a key!") 
+        elif location == throne_bonus2:
+            bonus = ("You found a health coin!")
+            var_health += 1     
         elif location == 48 and torch == 0:
             pickup = 2
-            bonus = ("You found a torch!")       
+            bonus = ("You found a torch!")  
+        elif location == 311 and torch == 0:
+            pickup = 2
+            bonus = ("You found a torch!") 
+
+        elif location == 651 and torch == 0:
+            pickup = 2
+            bonus = ("You found a torch!")  
+
+        elif location == 274 and wizard_floor1_count != 99:
+            pickup = 3
+            bonus = ("You found the wizard!")   
+
+        elif location == 458:
+            pickup = 4
+            bonus = ("You found the witch!")                 
 
         elif location in monster_location:
             bonus = ("A monster found you! You lost 3 health.")
@@ -1339,6 +1367,7 @@ def the_castle(var_un, name,var_health, var_monster_health, var_lives,var_wizard
 
                 key = 1
                 pickup = 0
+                locked_doors_list.clear()
             else:
                 key = 0 
                 pickup = 0   
@@ -1351,6 +1380,18 @@ def the_castle(var_un, name,var_health, var_monster_health, var_lives,var_wizard
             else:
                 torch = 0 
                 pickup = 0          
+        if pickup == 3:
+            wizard_floor1_count += 1
+            wizard_floor1(wizard_floor1_count,key)
+            pickup = 0
+
+        if pickup == 4:
+            witch_floor2_count += 1
+            witch_floor2(wizard_floor1_count,key,witch_floor2_count,kings_body)
+            pickup = 0
+            
+
+
 
         if var_health < 1:
             input("Too much damage.")
@@ -1366,7 +1407,68 @@ def the_castle(var_un, name,var_health, var_monster_health, var_lives,var_wizard
                 exit()
 
     exit()
+def witch_floor2(wizard_floor1_count,key,witch_floor2_count,kings_body):
+    if witch_floor2_count == 1:
+        if wizard_floor1_count == 99:
+            input("Gwenda: I see that you have found your friend!")
+            print("I wouldn't trust him.")
+            print("")
+            print("I found the kings corpse in his chambers.")
+            print("He was killed by the monsters.")   
+            print("Your coward friend is hiding in his hidden room") 
+        else:
+            input("Gwenda: have you found your friend yet?")
+            print("I saw him run away from the Master chamber")
+            print("and hide in a hidden room on the other.")
+            print("side of the Mezzanine.")
+            print("I sense that the King did not survive ")
+            print("the meeting with the wizard.")
+    
+    if kings_body == 0:
+        input("Gwenda: Go find the corpse and burn it!")
+        input(var_un + ": ?")
+        input("")
+        input("Gwenda: The body must be destroyed if he was the warlock!")
 
+
+
+def wizard_floor1(wizard_floor1_count,key):
+
+    input("Wizard " +name+": You made it back!")
+    if wizard_floor1_count == 1:
+        print("Wizard " +name+": I have not found the king yet.")
+        print("Infact, I haven't found anyone.")
+        print("This palace has become very unsafe.")
+        print("")
+        print("More monsters seem to show up every minute.")
+        print("Fortunately, the monsters seem to stay away from the light.")
+        print("")
+        if key == 1:
+            print("I see that you found the key that will unlock the")
+            print("rooms upstairs. Search the other rooms")
+            print("up there and...")
+            print("I will be up there soon.")
+            wizard_floor1_count = 99
+        else:
+            print("I have hidden a key in the Throne room.")
+            print("If you believe that you are strong enough,")
+            print("head to the Throne room to find it and ")
+            print("then come back here.")
+        print("") 
+    else:
+        if key == 1:
+            print("I see that you found the key that will unlock the")
+            print("rooms upstairs. Search the other rooms")
+            print("up there and...")
+            print("I will be up there soon.")
+            wizard_floor1_count = 99
+        else:
+            print("I have hidden a key in the Throne room.")
+            print("If you believe that you are strong enough,")
+            print("head to the Throne room to find it and ")
+            print("then come back here.")
+
+        print("")           
 
 
 the_castle(var_un, name,var_health, var_monster_health, var_lives,var_wizard_side,var_warlock_side)
